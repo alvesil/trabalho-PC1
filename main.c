@@ -41,9 +41,57 @@ void clr()
     printf("\ec\e[3J");
 }
 
-void cadastrar_pessoa(char dados[50])
+void cadastrar_pessoa(Pessoa pessoas [20])
 {
-    printf("Processa os dados aqui");
+    int i;
+    printf("digite 0 se for professor ou 1 se for aluno: ");
+    scanf("%i", &i );
+    while(i != 0 || i != 1)
+    {
+        if(i == 0){
+            //Cadastro de aluno
+            clr();
+            printf("Digite 0 se dor Brasileiro e 1 se for estrangeiro: ");
+            scanf("%i", &i);
+
+            while( i != 0 || i != 1){
+                //Aluno Brasileiro
+                if(i==0){
+                    printf("\nDigite 0 para nao PcD ou 1 para PcD: ");
+                    scanf("%i", &i);
+                    while(i !=0 || i != 0){
+
+                    }
+
+                }
+                //Aluno Extrangeiro
+                else if(i==1){
+
+                }
+                //Opção errada
+                else{
+                    clr();
+                    printf("\nOpcao nao valida\n");            
+                    printf("\nDigite 0 se dor Brasileiro e 1 se for estrangeiro: ");
+                    scanf("%i", &i );
+
+                }
+            }
+        }
+        else if(i == 1){
+            //Cadastro de professor
+            clr();
+            printf("Digite 0 se dor Brasileiro e 1 se for estrangeiro");
+            scanf("%i", &i);
+        }
+        else{
+            //Opção errada
+            clr();
+            printf("\nOpcao nao valida\n");            
+            printf("\ndigite 0 se for professor ou 1 se for aluno: ");
+            scanf("%i", &i );
+        }
+    }
 }
 
 void cadastrar_disciplina(char dados[50])
@@ -53,17 +101,19 @@ void cadastrar_disciplina(char dados[50])
 
 void main()
 {
-    int opInicial, opP, opD;
-    while (opInicial != 3)
+    int opcaoInicial, opcaoPessoa, opcaoDisciplina;
+    Pessoa pessoas[20];
+
+    while (opcaoInicial != 3)
     {
         printf("1 - Sistema de Pessoas\n");
         printf("2 - Sistema de Disciplinas\n");
         printf("3 - Sair do Sistema\n\n");
-        scanf("%d", &opInicial);
+        scanf("%d", &opcaoInicial);
 
-        if (opInicial == 1 || opInicial == 2 || opInicial == 3)
+        if (opcaoInicial == 1 || opcaoInicial == 2 || opcaoInicial == 3)
         {
-            switch (opInicial)
+            switch (opcaoInicial)
             {
             case 1:
                 clr();
@@ -73,22 +123,18 @@ void main()
                 printf("3 - Alterar Dados de uma Pessoa\n");
                 printf("4 - Remover Pessoa\n");
                 printf("5 - Voltar ao Menu Princiapl\n\n");
-                scanf("%d", &opP);
-                if (opP == 1 || opP == 2 || opP == 3 || opP == 4 || opP == 5)
+                scanf("%d", &opcaoPessoa);
+                if (opcaoPessoa == 1 || opcaoPessoa == 2 || opcaoPessoa == 3 || opcaoPessoa == 4 || opcaoPessoa == 5)
                 {
 
-                    if (opP == 1)
+                    if (opcaoPessoa == 1)
                     {
                         clr();
-                        char opP1[50];
-                        printf("Insira os dados separados por ';': ");
-                        scanf("%s", opP1);
-                        getchar();
-                        cadastrar_pessoa(opP1);
+                        cadastrar_pessoa(pessoas);
                     }
-                    if (opP == 5)
+                    if (opcaoPessoa == 5)
                     {
-                        opInicial = 0;
+                        opcaoInicial = 0;
                         clr();
                     }
                 }
@@ -105,10 +151,10 @@ void main()
                 printf("3 - Alterar Dados de uma Disciplina\n");
                 printf("4 - Remover Disciplina\n");
                 printf("5 - Voltar ao Menu Principal\n\n");
-                scanf("%d", &opD);
-                if (opD == 1 || opD == 2 || opD == 3 || opD == 4 || opD == 5)
+                scanf("%d", &opcaoDisciplina);
+                if (opcaoDisciplina == 1 || opcaoDisciplina == 2 || opcaoDisciplina == 3 || opcaoDisciplina == 4 || opcaoDisciplina == 5)
                 {
-                    if (opD == 1)
+                    if (opcaoDisciplina == 1)
                     {
                         clr();
                         char opD1[50];
@@ -117,9 +163,9 @@ void main()
                         getchar();
                         cadastrar_disciplina(opD1);
                     }
-                    if (opD == 5)
+                    if (opcaoDisciplina == 5)
                     {
-                        opInicial = 0;
+                        opcaoInicial = 0;
                         clr();
                     }
                 }
