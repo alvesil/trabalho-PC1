@@ -48,8 +48,8 @@ void cadastrar_pessoa(Pessoa pessoas [20])
     scanf("%i", &i );
     while(i != 0 || i != 1)
     {
+        //Cadastrar de aluno
         if(i == 0){
-            //Cadastro de aluno
             clr();
             printf("Digite 0 se dor Brasileiro e 1 se for estrangeiro: ");
             scanf("%i", &i);
@@ -60,13 +60,47 @@ void cadastrar_pessoa(Pessoa pessoas [20])
                     printf("\nDigite 0 para nao PcD ou 1 para PcD: ");
                     scanf("%i", &i);
                     while(i !=0 || i != 0){
+                        //Aluno PcD
+                        if(i == 0){
+                            //pedir os dados que faltam
+                        }
+                        //Aluno não PcD
+                        else if(i == 1){
+                            //pedir os dados que faltam
+                        }
+                        // Opção de aluno PcD invalida
+                        else{
+                            clr();
+                            printf("\nOpcao nao valida\n");            
+                            printf("\nDigite 0 para nao PcD ou 1 para PcD: ");
+                            scanf("%i", &i );
 
+                        }
                     }
 
                 }
                 //Aluno Extrangeiro
                 else if(i==1){
+                    printf("\nDigite 0 para nao PcD ou 1 para PcD: ");
+                    scanf("%i", &i);
+                    while(i !=0 || i != 0){
+                      //Aluno PcD
+                        if(i == 0){
+                            //pedir os dados que faltam
+                        }
+                        //Aluno não PcD
+                        else if(i == 1){
+                            //pedir os dados que faltam
+                        }
+                        // Opção de aluno PcD invalida
+                        else{
+                            clr();
+                            printf("\nOpcao nao valida\n");            
+                            printf("\nDigite 0 para nao PcD ou 1 para PcD: ");
+                            scanf("%i", &i );
 
+                        }
+                    }
                 }
                 //Opção errada
                 else{
@@ -83,9 +117,66 @@ void cadastrar_pessoa(Pessoa pessoas [20])
             clr();
             printf("Digite 0 se dor Brasileiro e 1 se for estrangeiro");
             scanf("%i", &i);
+            while( i != 0 || i != 1){
+                //Professor Brasileiro
+                if(i==0){
+                    printf("\nDigite 0 para nao PcD ou 1 para PcD: ");
+                    scanf("%i", &i);
+                    while(i !=0 || i != 0){
+                        //Professor PcD
+                        if(i == 0){
+                            //pedir os dados que faltam
+                        }
+                        //Professor não PcD
+                        else if(i == 1){
+                            //pedir os dados que faltam
+                        }
+                        // Opção de professor PcD invalida
+                        else{
+                            clr();
+                            printf("\nOpcao nao valida\n");            
+                            printf("\nDigite 0 para nao PcD ou 1 para PcD: ");
+                            scanf("%i", &i );
+
+                        }
+                    }
+
+                }
+                //Professor Extrangeiro
+                else if(i==1){
+                    printf("\nDigite 0 para nao PcD ou 1 para PcD: ");
+                    scanf("%i", &i);
+                    while(i !=0 || i != 0){
+                      //Professor PcD
+                        if(i == 0){
+                            //pedir os dados que faltam
+                        }
+                        //Professor não PcD
+                        else if(i == 1){
+                            //pedir os dados que faltam
+                        }
+                        // Opção de professor PcD invalida
+                        else{
+                            clr();
+                            printf("\nOpcao nao valida\n");            
+                            printf("\nDigite 0 para nao PcD ou 1 para PcD: ");
+                            scanf("%i", &i );
+
+                        }
+                    }
+                }
+                //Opção professor nacionalidade errada
+                else{
+                    clr();
+                    printf("\nOpcao nao valida\n");            
+                    printf("\nDigite 0 se dor Brasileiro e 1 se for estrangeiro: ");
+                    scanf("%i", &i );
+
+                }
+            }
         }
         else{
-            //Opção errada
+            //Opção aluno ou Professor errada
             clr();
             printf("\nOpcao nao valida\n");            
             printf("\ndigite 0 se for professor ou 1 se for aluno: ");
@@ -96,7 +187,7 @@ void cadastrar_pessoa(Pessoa pessoas [20])
 
 void cadastrar_disciplina(char dados[50])
 {
-    printf("Processa os dados aqui");
+   // printf("Processa os dados aqui");
 }
 
 void main()
