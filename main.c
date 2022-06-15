@@ -1,5 +1,12 @@
 #include <stdio.h>
 
+void menu_Pessoa();
+void menu_Principal();
+void menu_Disciplina(); 
+
+
+int menuPrincipal, menuPessoa, menuDisciplina;
+
 typedef struct
 {
     char nome[20];
@@ -41,90 +48,65 @@ void clr()
     printf("\ec\e[3J");
 }
 
-void main()
-{
-    int opcaoInicial, opcaoPessoa, opcaoDisciplina;
-    Pessoa pessoas[20];
-
-    while (opcaoInicial != 3)
-    {
+void menu_Principal(){
+    while(menuPrincipal != 3){
+        clr();
         printf("1 - Sistema de Pessoas\n");
-        printf("2 - Sistema de Disciplinas\n");
-        printf("3 - Sair do Sistema\n\n");
-        scanf("%d", &opcaoInicial);
+        printf("2 - Sistema de Disciplina\n");
+        printf("3 - Sair do Sistema\n");
+        printf("\nDigite a opcao: ");
+        scanf("%i", &menuPrincipal);
 
-        if (opcaoInicial == 1 || opcaoInicial == 2 || opcaoInicial == 3)
-        {
-            switch (opcaoInicial)
-            {
-            case 1:
-                clr();
-                printf("---------PESSOAS-----------\n");
-                printf("1 - Cadastrar Pessoas\n");
-                printf("2 - Exibir Dados de uma Pessoa\n");
-                printf("3 - Alterar Dados de uma Pessoa\n");
-                printf("4 - Remover Pessoa\n");
-                printf("5 - Voltar ao Menu Princiapl\n\n");
-                scanf("%d", &opcaoPessoa);
-                if (opcaoPessoa == 1 || opcaoPessoa == 2 || opcaoPessoa == 3 || opcaoPessoa == 4 || opcaoPessoa == 5)
-                {
+        if(menuPrincipal == 1 || menuPrincipal == 2 || menuPrincipal == 3){
+            
+            switch(menuPrincipal){
 
-                    if (opcaoPessoa == 1)
-                    {
-                        clr();
-                        cadastrar_pessoa(pessoas);
-                    }
-                    if (opcaoPessoa == 5)
-                    {
-                        opcaoInicial = 0;
-                        clr();
-                    }
-                }
-                else
-                {
-                    printf("Opção inválida\n");
-                }
+                case 1:
 
-            case 2:
-                clr();
-                printf("---------DISCIPLINAS-----------\n");
-                printf("1 - Cadastrar Disciplina\n");
-                printf("2 - Exibir Dados de uma Disciplina\n");
-                printf("3 - Alterar Dados de uma Disciplina\n");
-                printf("4 - Remover Disciplina\n");
-                printf("5 - Voltar ao Menu Principal\n\n");
-                scanf("%d", &opcaoDisciplina);
-                if (opcaoDisciplina == 1 || opcaoDisciplina == 2 || opcaoDisciplina == 3 || opcaoDisciplina == 4 || opcaoDisciplina == 5)
-                {
-                    if (opcaoDisciplina == 1)
-                    {
-                        clr();
-                        char opD1[50];
-                        printf("Insira os dados separados por ';': ");
-                        scanf("%s", opD1);
-                        getchar();
-                        cadastrar_disciplina(opD1);
-                    }
-                    if (opcaoDisciplina == 5)
-                    {
-                        opcaoInicial = 0;
-                        clr();
-                    }
-                }
-                else
-                {
-                    printf("Opção inválida\n");
-                }
+                //Sistema de Pessoas
+                menu_Pessoa();
+                break;
 
-            case 3:
-                clr();
-                printf("Voce saiu!\n");
+                case 2:
+                //sistema de Disciplina
+                menu_Disciplina();                
+                break;
+
+                case 3:
+                //Sair do Sistema
+                break;
             }
         }
-        else
-        {
+        else{
             clr();
-            printf("\nOpcao invalida!!!\n\n");
+            printf("\nopcao Invalida\n\n");
+            printf("1 - Sistema de Pessoas\n");
+            printf("2 - Sistema de Disciplina\n");
+            printf("3 - Sair do Sistema\n");
+            printf("\nDigite a opcao: ");
+            scanf("%i", &menuPrincipal);
         }
     }
+}
+
+void menu_Pessoa(){
+    clr();
+    printf("entro no menu pessoa");
+    scanf("%i", &menuPessoa);
+    
+}
+
+void menu_Disciplina(){
+    clr();
+    printf("entro no menu Disciplina");
+    scanf("%i", &menuDisciplina);
+    
+}
+
+int main (){
+
+menu_Principal();
+
+return 0;
+
 }
