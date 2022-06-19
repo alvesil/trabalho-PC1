@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 
 typedef struct
 {
@@ -39,6 +40,79 @@ typedef struct
 void clr()
 {
     printf("\ec\e[3J");
+}
+
+int cadastraAluno(Escola *escola)
+{
+    char entrada[100];
+    scanf("%s", &entrada);
+    //printf("%s", entrada);
+    printf("\n");
+    char pVirgula[3];
+    //printf("%d", strlen(entrada));
+    int cont = 0;
+    
+    for (int i = 0; i < strlen(entrada); i++)
+    {
+        if(entrada[i] == ';')
+        { 
+            if (cont == 1 || cont == 5 || cont == 7)
+            {
+                if(cont == 1){
+                  pVirgula[0] = entrada[i+1];
+                }
+                if(cont == 5){
+                  pVirgula[1] = entrada[i+1];
+                }
+                if(cont == 7){
+                  pVirgula[2] = entrada[i+1];
+                }
+                //printf("%c", entrada[i+1]);
+            }
+            //printf("%c", pVirgula[i]);
+            cont++;
+        }
+    }
+
+    if (pVirgula[0] == '0' && pVirgula[1] == '0' && pVirgula[2] == '0')
+    {
+        printf("Brasileiro, não PcD e Aluno\n");
+        for (int i = 0; i < strlen(entrada); i++)
+        {
+
+        }
+    }else if (pVirgula[0] == '0' && pVirgula[1] == '1' && pVirgula[2] == '0')
+    {
+        printf("Brasileiro, PcD e Aluno\n");
+    }else if (pVirgula[0] == '0' && pVirgula[1] == '0' && pVirgula[2] == '1')
+    {
+        printf("Brasileiro, não PcD e Professor\n");
+    }else if(pVirgula[0] == '0' && pVirgula[1] == '1' && pVirgula[2] == '1')
+    {
+        printf("Brasileiro, PcD e Professor\n");
+    }else if (pVirgula[0] == '1' && pVirgula[1] == '0' && pVirgula[2] == '0')
+    {
+        printf("Estrangeiro, não PcD e Aluno\n");
+    }else if (pVirgula[0] == '1' && pVirgula[1] == '1' && pVirgula[2] == '0')
+    {
+        printf("Estrangeiro, PcD e Aluno\n");
+    }else if (pVirgula[0] == '1' && pVirgula[1] == '0' && pVirgula[2] == '1')
+    {
+        printf("Estrangeiro, não PcD e Professor\n");
+    }
+
+    //printf("%d\n", cont);
+    for (int i = 0; i < 3; i++)
+    {
+        printf("%c", pVirgula[i]);
+    }
+    //printf("%d", strlen(pVirgula));
+    
+    //printf("%s", pVirgula);
+   
+    scanf("%s", &entrada);
+
+    return 0;
 }
 
 void cadastrar_pessoa(Pessoa pessoas [20])
@@ -102,7 +176,7 @@ void cadastrar_disciplina(char dados[50])
 void main()
 {
     int opcaoInicial, opcaoPessoa, opcaoDisciplina;
-    Pessoa pessoas[20];
+    Escola *escola;
 
     while (opcaoInicial != 3)
     {
@@ -130,7 +204,7 @@ void main()
                     if (opcaoPessoa == 1)
                     {
                         clr();
-                        cadastrar_pessoa(pessoas);
+                        cadastraAluno(escola);
                     }
                     if (opcaoPessoa == 5)
                     {
