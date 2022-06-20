@@ -52,7 +52,12 @@ int cadastraAluno(Escola *escola)
     //printf("%d", strlen(entrada));
     int cont = 0;
     
-    for (int i = 0; i < strlen(entrada); i++)
+    /*
+    Laço de repetição para verificar se foi digitado o padrão correto
+    001, 010, 100... etc. E com base nisso cadastrar a pessoa.
+    */
+    int i;
+    for (i = 0; i < strlen(entrada); i++)
     {
         if(entrada[i] == ';')
         { 
@@ -74,13 +79,98 @@ int cadastraAluno(Escola *escola)
         }
     }
 
+    /*
+    Verificar qual o padrão foi digitado.
+    */
     if (pVirgula[0] == '0' && pVirgula[1] == '0' && pVirgula[2] == '0')
     {
-        printf("Brasileiro, não PcD e Aluno\n");
-        for (int i = 0; i < strlen(entrada); i++)
-        {
+        cont = 0;
+        char nome[20] = {""};  //Nome do aluno
+        char sobrenome[20]; //Sobrenome do aluno
+        char cpf[12]; //CPF do aluno
+        char rg[8]; //RG do aluno
+        char dtNsc[11]; //Data de nascimento do aluno
+        char cep [9]; //CEP do aluno
 
+        printf("Brasileiro, não PcD e Aluno\n");
+        int i, j;
+        for (i = 0, j = 0; i < strlen(entrada); i++)
+        {
+    	 	if(entrada[i] == ';'){
+            	cont ++;
+	            //TODO: separar os dados para gravar o tipo de pessoa.
+            }
+            if(cont == 0 && entrada[i] != ';'){
+                nome[j] = entrada[i];
+            	escola->alunos->nome[j] = entrada[i];
+                j++;
+            } 
         }
+        cont = 0; //Zerando o contador pro próximo loop
+        for(i = 0, j = 0; i < strlen(entrada); i++){
+        	if(entrada[i] == ';'){
+            	cont ++;
+            }
+        	if (cont == 1 && entrada[i] != ';'){
+                sobrenome[j] = entrada[i];
+                escola->alunos->sobrenome[j] = entrada[i];
+                j++;
+            }
+		}
+		cont = 0; //Zerando o contador pro próximo loop
+		for(i = 0, j = 0; i < strlen(entrada); i++){
+			if(entrada[i] == ';'){
+            	cont ++;
+            }
+			if (cont == 3 && entrada[i] != ';'){
+                cpf[j] = entrada[i];
+                escola->alunos->cpf[j] = entrada[i];
+                j++;
+            }
+		}
+		cont = 0; //Zerando o contador pro próximo loop
+		for(i = 0, j = 0; i < strlen(entrada); i++){
+			if(entrada[i] == ';'){
+            	cont ++;
+            }
+			if (cont == 4 && entrada[i] != ';'){
+                rg[j] = entrada[i];
+                escola->alunos->rg[j] = entrada[i];
+                j++;
+            }
+        }
+		cont = 0; //Zerando o contador pro próximo loop}
+		for(i = 0, j = 0; i < strlen(entrada); i++){
+			if(entrada[i] == ';'){
+            	cont ++;
+            }
+			if (cont == 5 && entrada[i] != ';'){
+                dtNsc[j] = entrada[i];
+                escola->alunos->dt_nasc[j] = entrada[i];
+                j++;
+            }
+		}
+		cont = 0; //Zerando o contador pro próximo loop
+		for(i = 0, j = 0; i < strlen(entrada); i++){
+			if(entrada[i] == ';'){
+            	cont ++;
+            }
+			if (cont == 7 && entrada[i] != ';'){
+            	cep[j] = entrada[i];
+                escola->alunos->cep[j] = entrada[i];
+                j++;
+            }
+		}
+
+        printf("%s\n", escola->alunos->nome);
+        printf("%s\n", escola->alunos->sobrenome);
+        printf("%s\n", escola->alunos->cpf);
+        printf("%s\n", escola->alunos->rg);
+        printf("%s\n", escola->alunos->dt_nasc);
+        printf("%s\n", escola->alunos->cep);
+        
+        scanf("%s", &entrada);
+        
     }else if (pVirgula[0] == '0' && pVirgula[1] == '1' && pVirgula[2] == '0')
     {
         printf("Brasileiro, PcD e Aluno\n");
@@ -102,7 +192,7 @@ int cadastraAluno(Escola *escola)
     }
 
     //printf("%d\n", cont);
-    for (int i = 0; i < 3; i++)
+    for (i = 0; i < 3; i++)
     {
         printf("%c", pVirgula[i]);
     }
