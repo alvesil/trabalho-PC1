@@ -127,22 +127,30 @@ while(menuPessoa != 5){
                 case 1:
 
                 //Cadastrar pessoa
-                printf("Cadastrar"); 
+                clr();
+                printf("\nCadastrar");
+                sleep(2);
                 break;
 
                 case 2:
                 //Exibir dados de uma pessoa
-                printf("Exibir");            
+                clr();
+                printf("\nExibir");
+                sleep(2);
                 break;
 
                 case 3:
                 //Alterar dados da pessoa
-                printf("Excluir"); 
+                clr();
+                printf("\nExcluir"); 
+                sleep(2);
                 break;
 
                   case 4:
                 //Excluir pessoa
-                printf("Excluir");              
+                clr();
+                printf("\nExcluir");  
+                sleep(2);
                 break;
 
                 case 5:
@@ -154,6 +162,7 @@ while(menuPessoa != 5){
         else{
             clr();
             printf("\nopcao Invalida\n\n");
+            sleep(2);
 
         }
     }
@@ -189,27 +198,37 @@ void menu_Disciplina(){
                 case 1:
 
                 //Cadastrar pessoa
-                printf("Cadastrar"); 
+                clr();
+                printf("\nCadastrar"); 
+                sleep(2);
                 break;
 
                 case 2:
                 //Exibir dados de uma pessoa
-                printf("Alterar professor");            
+                clr();
+                printf("\nAlterar professor");    
+                sleep(2);
                 break;
 
                 case 3:
                 //Alterar dados da pessoa
-                printf("Adicionar aluno"); 
+                clr();
+                printf("\nAdicionar aluno"); 
+                sleep(2);
                 break;
 
                   case 4:
                 //Excluir pessoa
-                printf("Remover aluno");              
+                clr();
+                printf("\nRemover aluno");   
+                sleep(2);
                 break;
 
                   case 5:
                 //Voltar ao menu principal
-                printf("Exibir dados");
+                clr();
+                printf("\nExibir dados");
+                sleep(2);
                 break;
 
                 case 6:
@@ -221,6 +240,7 @@ void menu_Disciplina(){
         else{
             clr();
             printf("\nopcao Invalida\n\n");
+            sleep(2);
 
         }
     }
