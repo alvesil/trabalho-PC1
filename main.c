@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 #include <stdlib.h>
 #if def_WIN32
 #include<Windows.h>
@@ -54,6 +55,166 @@ void clr()
     printf("\ec\e[3J");
 }
 
+int cadastraAluno(Escola *escola)
+{
+    char entrada[100];
+    scanf("%s", entrada);
+    //printf("%s", entrada);
+    printf("\n");
+    char pVirgula[3];
+    //printf("%d", strlen(entrada));
+    int cont = 0;
+    
+    /*
+    Laço de repetição para verificar se foi digitado o padrão correto
+    001, 010, 100... etc. E com base nisso cadastrar a pessoa.
+    */
+    int i;
+    for (i = 0; i < strlen(entrada); i++)
+    {
+        if(entrada[i] == ';')
+        { 
+            if (cont == 1 || cont == 5 || cont == 7)
+            {
+                if(cont == 1){
+                  pVirgula[0] = entrada[i+1];
+                }
+                if(cont == 5){
+                  pVirgula[1] = entrada[i+1];
+                }
+                if(cont == 7){
+                  pVirgula[2] = entrada[i+1];
+                }
+                //printf("%c", entrada[i+1]);
+            }
+            //printf("%c", pVirgula[i]);
+            cont++;
+        }
+    }
+
+    /*
+    Verificar qual o padrão foi digitado.
+    */
+    if (pVirgula[0] == '0' && pVirgula[1] == '0' && pVirgula[2] == '0')
+    {
+        cont = 0;
+        char nome[20];  //Nome do aluno
+        char sobrenome[20]; //Sobrenome do aluno
+        char cpf[12]; //CPF do aluno
+        char rg[8]; //RG do aluno
+        char dtNsc[11]; //Data de nascimento do aluno
+        char cep [9]; //CEP do aluno
+
+        printf("Brasileiro, não PcD e Aluno\n");
+        int i, j;
+        for (i = 0, j = 0; i < strlen(entrada); i++)
+        {
+    	 	if(entrada[i] == ';'){
+            	cont ++;
+	            //TODO: separar os dados para gravar o tipo de pessoa.
+            }
+            if(cont == 0 && entrada[i] != ';'){
+                nome[j] = entrada[i];
+            	escola->alunos->nome[j] = entrada[i];
+                j++;
+            } 
+        }
+        cont = 0; //Zerando o contador pro próximo loop
+        for(i = 0, j = 0; i < strlen(entrada); i++){
+        	if(entrada[i] == ';'){
+            	cont ++;
+            }
+        	if (cont == 1 && entrada[i] != ';'){
+                sobrenome[j] = entrada[i];
+                escola->alunos->sobrenome[j] = entrada[i];
+                j++;
+            }
+		}
+		cont = 0; //Zerando o contador pro próximo loop
+		for(i = 0, j = 0; i < strlen(entrada); i++){
+			if(entrada[i] == ';'){
+            	cont ++;
+            }
+			if (cont == 3 && entrada[i] != ';'){
+                cpf[j] = entrada[i];
+                escola->alunos->cpf[j] = entrada[i];
+                j++;
+            }
+		}
+		cont = 0; //Zerando o contador pro próximo loop
+		for(i = 0, j = 0; i < strlen(entrada); i++){
+			if(entrada[i] == ';'){
+            	cont ++;
+            }
+			if (cont == 4 && entrada[i] != ';'){
+                rg[j] = entrada[i];
+                escola->alunos->rg[j] = entrada[i];
+                j++;
+            }
+        }
+		cont = 0; //Zerando o contador pro próximo loop}
+		for(i = 0, j = 0; i < strlen(entrada); i++){
+			if(entrada[i] == ';'){
+            	cont ++;
+            }
+			if (cont == 5 && entrada[i] != ';'){
+                dtNsc[j] = entrada[i];
+                escola->alunos->dt_nasc[j] = entrada[i];
+                j++;
+            }
+		}
+		cont = 0; //Zerando o contador pro próximo loop
+		for(i = 0, j = 0; i < strlen(entrada); i++){
+			if(entrada[i] == ';'){
+            	cont ++;
+            }
+			if (cont == 7 && entrada[i] != ';'){
+            	cep[j] = entrada[i];
+                escola->alunos->cep[j] = entrada[i];
+                j++;
+            }
+		}
+
+        //printf("%s\n", nome); 
+        //printf("%s\n", escola->alunos->nome);
+        //printf("%s\n", sobrenome); 
+        //printf("%s\n",escola->alunos->sobrenome);
+        //printf("%s\n", cpf); 
+        //printf("%s\n", escola->alunos->cpf);
+        //printf("%s\n", rg); 
+        //printf("%s\n", escola->alunos->rg);
+        //printf("%s\n", dtNsc); 
+        //printf("%s\n", escola->alunos->dt_nasc);
+        //printf("%s\n", cep); 
+        //printf("%s\n", escola->alunos->cep);
+        
+        //scanf("%s", entrada);
+
+        return 1;
+        
+    }else if (pVirgula[0] == '0' && pVirgula[1] == '1' && pVirgula[2] == '0')
+    {
+        printf("Brasileiro, PcD e Aluno\n");
+    }else if (pVirgula[0] == '0' && pVirgula[1] == '0' && pVirgula[2] == '1')
+    {
+        printf("Brasileiro, não PcD e Professor\n");
+    }else if(pVirgula[0] == '0' && pVirgula[1] == '1' && pVirgula[2] == '1')
+    {
+        printf("Brasileiro, PcD e Professor\n");
+    }else if (pVirgula[0] == '1' && pVirgula[1] == '0' && pVirgula[2] == '0')
+    {
+        printf("Estrangeiro, não PcD e Aluno\n");
+    }else if (pVirgula[0] == '1' && pVirgula[1] == '1' && pVirgula[2] == '0')
+    {
+        printf("Estrangeiro, PcD e Aluno\n");
+    }else if (pVirgula[0] == '1' && pVirgula[1] == '0' && pVirgula[2] == '1')
+    {
+        printf("Estrangeiro, não PcD e Professor\n");
+    }
+
+    return 0;
+}
+
 void menu_Principal(){
     menuDisciplina = 0;
     menuPrincipal = 0;
@@ -71,7 +232,7 @@ void menu_Principal(){
             switch(menuPrincipal){
 
                 case 0:
-                //zera as op��es
+                //zera as op��es
                 menu_Principal();
                 break;
 
@@ -120,7 +281,7 @@ while(menuPessoa != 5){
             switch(menuPessoa){
                 case 0: 
 
-                //zera as opc�es
+                //zera as opc�es
                 menu_Pessoa();
                 break;
 
@@ -169,8 +330,10 @@ while(menuPessoa != 5){
 }
     
 
-void menu_Disciplina(){
-
+int main()
+{
+    int opcaoInicial, opcaoPessoa, opcaoDisciplina;
+    Escola escola;
     menuDisciplina = 0;
     menuPrincipal = 0;
     menuPessoa = 0;
@@ -191,7 +354,7 @@ void menu_Disciplina(){
             switch(menuDisciplina){
                 case 0: 
 
-                //zera as opc�es
+                //zera as opc�es
                 menu_Disciplina();
                 break;
 
@@ -217,7 +380,7 @@ void menu_Disciplina(){
                 sleep(2);
                 break;
 
-                  case 4:
+                case 4:
                 //Excluir pessoa
                 clr();
                 printf("\nRemover aluno");   
