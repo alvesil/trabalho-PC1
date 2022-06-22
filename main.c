@@ -1,4 +1,10 @@
 #include <stdio.h>
+#include <stdlib.h>
+#if def_WIN32
+#include<Windows.h>
+#else
+#include <unistd.h>
+#endif
 
 void menu_Pessoa();
 void menu_Principal();
@@ -82,13 +88,15 @@ void menu_Principal(){
 
                 case 3:
                 //Sair do Sistema
+                exit(1);
                 break;
             }
         }
         else{
             clr();
             printf("\nopcao Invalida\n\n");
-            menu_Principal();
+            sleep(2);
+  
         }
     }
 }
@@ -99,7 +107,6 @@ void menu_Pessoa(){
     menuPessoa = 0;
 while(menuPessoa != 5){
         clr();
-        printf("\nopcao Invalida\n\n");
         printf("1 - Cadastrar pessoa\n");
         printf("2 - Exibir dados de uma pessoa\n");
         printf("3 - Alterar dados da pessoa\n");
@@ -147,7 +154,7 @@ while(menuPessoa != 5){
         else{
             clr();
             printf("\nopcao Invalida\n\n");
-            menu_Pessoa();
+
         }
     }
 }
@@ -161,7 +168,6 @@ void menu_Disciplina(){
 
     while(menuPessoa != 5){
         clr();
-        printf("\nopcao Invalida\n\n");
         printf("1 - Cadastrar disciplina\n");
         printf("2 - Alterar professor da disciplina\n");
         printf("3 - Adicionar aluno na disciplina\n");
@@ -215,7 +221,7 @@ void menu_Disciplina(){
         else{
             clr();
             printf("\nopcao Invalida\n\n");
-            menu_Disciplina();
+
         }
     }
     
