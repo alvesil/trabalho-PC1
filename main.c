@@ -45,7 +45,7 @@ void clr()
 int cadastraAluno(Escola *escola)
 {
     char entrada[100];
-    scanf("%s", &entrada);
+    scanf("%s", entrada);
     //printf("%s", entrada);
     printf("\n");
     char pVirgula[3];
@@ -85,7 +85,7 @@ int cadastraAluno(Escola *escola)
     if (pVirgula[0] == '0' && pVirgula[1] == '0' && pVirgula[2] == '0')
     {
         cont = 0;
-        char nome[20] = {""};  //Nome do aluno
+        char nome[20];  //Nome do aluno
         char sobrenome[20]; //Sobrenome do aluno
         char cpf[12]; //CPF do aluno
         char rg[8]; //RG do aluno
@@ -162,14 +162,22 @@ int cadastraAluno(Escola *escola)
             }
 		}
 
-        printf("%s\n", escola->alunos->nome);
-        printf("%s\n", escola->alunos->sobrenome);
-        printf("%s\n", escola->alunos->cpf);
-        printf("%s\n", escola->alunos->rg);
-        printf("%s\n", escola->alunos->dt_nasc);
-        printf("%s\n", escola->alunos->cep);
+        //printf("%s\n", nome); 
+        //printf("%s\n", escola->alunos->nome);
+        //printf("%s\n", sobrenome); 
+        //printf("%s\n",escola->alunos->sobrenome);
+        //printf("%s\n", cpf); 
+        //printf("%s\n", escola->alunos->cpf);
+        //printf("%s\n", rg); 
+        //printf("%s\n", escola->alunos->rg);
+        //printf("%s\n", dtNsc); 
+        //printf("%s\n", escola->alunos->dt_nasc);
+        //printf("%s\n", cep); 
+        //printf("%s\n", escola->alunos->cep);
         
-        scanf("%s", &entrada);
+        //scanf("%s", entrada);
+
+        return 1;
         
     }else if (pVirgula[0] == '0' && pVirgula[1] == '1' && pVirgula[2] == '0')
     {
@@ -192,15 +200,16 @@ int cadastraAluno(Escola *escola)
     }
 
     //printf("%d\n", cont);
-    for (i = 0; i < 3; i++)
+    /*for (i = 0; i < 3; i++)
     {
         printf("%c", pVirgula[i]);
     }
+    */
     //printf("%d", strlen(pVirgula));
     
     //printf("%s", pVirgula);
    
-    scanf("%s", &entrada);
+    //scanf("%s", entrada);
 
     return 0;
 }
@@ -263,10 +272,10 @@ void cadastrar_disciplina(char dados[50])
     printf("Processa os dados aqui");
 }
 
-void main()
+int main()
 {
     int opcaoInicial, opcaoPessoa, opcaoDisciplina;
-    Escola *escola;
+    Escola escola;
 
     while (opcaoInicial != 3)
     {
@@ -292,9 +301,19 @@ void main()
                 {
 
                     if (opcaoPessoa == 1)
-                    {
-                        clr();
-                        cadastraAluno(escola);
+                    {                 
+                        if (cadastraAluno(&escola) == 1)
+                        {
+                            //clr();
+                            printf("Aluno cadastrado com sucesso.");
+                            return 0;
+                            //getchar();
+                        }else{
+                            printf("Aluno não cadastrado.");
+                            return 0;
+                            //getchar();
+                        }
+                        
                     }
                     if (opcaoPessoa == 5)
                     {
