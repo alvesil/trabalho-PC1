@@ -49,6 +49,9 @@ void clr()
 }
 
 void menu_Principal(){
+    menuDisciplina = 0;
+    menuPrincipal = 0;
+    menuPessoa = 0;
     while(menuPrincipal != 3){
         clr();
         printf("1 - Sistema de Pessoas\n");
@@ -57,9 +60,14 @@ void menu_Principal(){
         printf("\nDigite a opcao: ");
         scanf("%i", &menuPrincipal);
 
-        if(menuPrincipal == 1 || menuPrincipal == 2 || menuPrincipal == 3){
+        if(menuPrincipal == 0 ||menuPrincipal == 1 || menuPrincipal == 2 || menuPrincipal == 3){
             
             switch(menuPrincipal){
+
+                case 0:
+                //zera as opções
+                menu_Principal();
+                break;
 
                 case 1:
 
@@ -80,26 +88,136 @@ void menu_Principal(){
         else{
             clr();
             printf("\nopcao Invalida\n\n");
-            printf("1 - Sistema de Pessoas\n");
-            printf("2 - Sistema de Disciplina\n");
-            printf("3 - Sair do Sistema\n");
-            printf("\nDigite a opcao: ");
-            scanf("%i", &menuPrincipal);
+            menu_Principal();
         }
     }
 }
 
 void menu_Pessoa(){
-    clr();
-    printf("entro no menu pessoa");
-    scanf("%i", &menuPessoa);
-    
+    menuDisciplina = 0;
+    menuPrincipal = 0;
+    menuPessoa = 0;
+while(menuPessoa != 5){
+        clr();
+        printf("\nopcao Invalida\n\n");
+        printf("1 - Cadastrar pessoa\n");
+        printf("2 - Exibir dados de uma pessoa\n");
+        printf("3 - Alterar dados da pessoa\n");
+        printf("4 - Excluir pessoa\n");
+        printf("5 - Voltar ao menu principal\n");
+        printf("\nDigite a opcao: ");
+        scanf("%i", &menuPessoa);
+
+        if(menuPessoa == 0 || menuPessoa == 1 || menuPessoa == 2 || menuPessoa == 3 || menuPessoa == 4 || menuPessoa == 5){
+            
+            switch(menuPessoa){
+                case 0: 
+
+                //zera as opcões
+                menu_Pessoa();
+                break;
+
+                case 1:
+
+                //Cadastrar pessoa
+                printf("Cadastrar"); 
+                break;
+
+                case 2:
+                //Exibir dados de uma pessoa
+                printf("Exibir");            
+                break;
+
+                case 3:
+                //Alterar dados da pessoa
+                printf("Excluir"); 
+                break;
+
+                  case 4:
+                //Excluir pessoa
+                printf("Excluir");              
+                break;
+
+                case 5:
+                //Voltar ao menu principal
+                menu_Principal();
+                break;
+            }
+        }
+        else{
+            clr();
+            printf("\nopcao Invalida\n\n");
+            menu_Pessoa();
+        }
+    }
 }
+    
 
 void menu_Disciplina(){
-    clr();
-    printf("entro no menu Disciplina");
-    scanf("%i", &menuDisciplina);
+
+    menuDisciplina = 0;
+    menuPrincipal = 0;
+    menuPessoa = 0;
+
+    while(menuPessoa != 5){
+        clr();
+        printf("\nopcao Invalida\n\n");
+        printf("1 - Cadastrar disciplina\n");
+        printf("2 - Alterar professor da disciplina\n");
+        printf("3 - Adicionar aluno na disciplina\n");
+        printf("4 - Remover aluno da disciplina\n");
+        printf("5 - Exibir dados da disciplina\n");
+        printf("6 - Voltar ao menu principal\n");
+        printf("\nDigite a opcao: ");
+        scanf("%i", &menuDisciplina);
+
+        if(menuDisciplina == 0 || menuDisciplina == 1 || menuDisciplina == 2 || menuDisciplina == 3 || menuDisciplina == 4 || menuDisciplina == 5 || menuDisciplina == 6){
+            
+            switch(menuDisciplina){
+                case 0: 
+
+                //zera as opcões
+                menu_Disciplina();
+                break;
+
+                case 1:
+
+                //Cadastrar pessoa
+                printf("Cadastrar"); 
+                break;
+
+                case 2:
+                //Exibir dados de uma pessoa
+                printf("Alterar professor");            
+                break;
+
+                case 3:
+                //Alterar dados da pessoa
+                printf("Adicionar aluno"); 
+                break;
+
+                  case 4:
+                //Excluir pessoa
+                printf("Remover aluno");              
+                break;
+
+                  case 5:
+                //Voltar ao menu principal
+                printf("Exibir dados");
+                break;
+
+                case 6:
+                //Voltar ao menu principal
+                menu_Principal();
+                break;
+            }
+        }
+        else{
+            clr();
+            printf("\nopcao Invalida\n\n");
+            menu_Disciplina();
+        }
+    }
     
 }
 
