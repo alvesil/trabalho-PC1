@@ -60,6 +60,7 @@ void menu_Principal(){
     menuPessoa = 0;
     while(menuPrincipal != 3){
         clr();
+        printf("--------PRINCIPAL--------\n");
         printf("1 - Sistema de Pessoas\n");
         printf("2 - Sistema de Disciplina\n");
         printf("3 - Sair do Sistema\n");
@@ -107,6 +108,7 @@ void menu_Pessoa(){
     menuPessoa = 0;
 while(menuPessoa != 5){
         clr();
+        printf("---------PESSOA---------\n");
         printf("1 - Cadastrar pessoa\n");
         printf("2 - Exibir dados de uma pessoa\n");
         printf("3 - Alterar dados da pessoa\n");
@@ -177,6 +179,7 @@ void menu_Disciplina(){
 
     while(menuPessoa != 5){
         clr();
+        printf("--------DISCIPLINA--------\n");
         printf("1 - Cadastrar disciplina\n");
         printf("2 - Alterar professor da disciplina\n");
         printf("3 - Adicionar aluno na disciplina\n");
