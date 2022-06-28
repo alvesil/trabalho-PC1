@@ -1,15 +1,15 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#if def_WIN32
+#ifdef _WIN32
 #include<Windows.h>
 #else
-//#include <unistd.h>
+#include <unistd.h>
 #endif
 
 void menu_Pessoa();
 void menu_Principal();
-void menu_Disciplina(); 
+//void menu_Disciplina(); 
 
 
 int menuPrincipal, menuPessoa, menuDisciplina;
@@ -104,14 +104,13 @@ int cadastraAluno(Escola *escola)
         char rg[8]; //RG do aluno
         char dtNsc[11]; //Data de nascimento do aluno
         char cep [9]; //CEP do aluno
-
-        printf("Brasileiro, não PcD e Aluno\n");
+        clr();
+        printf("Brasileiro, não PcD e Aluno \n\n");
         int i, j;
         for (i = 0, j = 0; i < strlen(entrada); i++)
         {
     	 	if(entrada[i] == ';'){
             	cont ++;
-	            //TODO: separar os dados para gravar o tipo de pessoa.
             }
             if(cont == 0 && entrada[i] != ';'){
                 nome[j] = entrada[i];
@@ -244,7 +243,7 @@ void menu_Principal(){
 
                 case 2:
                 //sistema de Disciplina
-                menu_Disciplina();                
+                //menu_Disciplina();                
                 break;
 
                 case 3:
@@ -256,8 +255,7 @@ void menu_Principal(){
         else{
             clr();
             printf("\nopcao Invalida\n\n");
-            sleep(2);
-  
+            //sleep(2);
         }
     }
 }
@@ -266,6 +264,7 @@ void menu_Pessoa(){
     menuDisciplina = 0;
     menuPrincipal = 0;
     menuPessoa = 0;
+    Escola escola;
 while(menuPessoa != 5){
         clr();
         printf("1 - Cadastrar pessoa\n");
@@ -286,32 +285,41 @@ while(menuPessoa != 5){
                 break;
 
                 case 1:
-
+                    if (cadastraAluno(&escola))
+                    {
+                        printf("Cadastrado\n\n");
+                        printf("Data de Nascimento: %s", escola.alunos->dt_nasc);
+                        Sleep(5000);
+                    }else{
+                        printf(" Não Cadastrado");
+                        Sleep(4);
+                    }
+                    
                 //Cadastrar pessoa
                 clr();
                 printf("\nCadastrar");
-                sleep(2);
+                //sleep(2);
                 break;
 
                 case 2:
                 //Exibir dados de uma pessoa
                 clr();
                 printf("\nExibir");
-                sleep(2);
+                //sleep(2);
                 break;
 
                 case 3:
                 //Alterar dados da pessoa
                 clr();
                 printf("\nExcluir"); 
-                sleep(2);
+                //sleep(2);
                 break;
 
                   case 4:
                 //Excluir pessoa
                 clr();
                 printf("\nExcluir");  
-                sleep(2);
+                //sleep(2);
                 break;
 
                 case 5:
@@ -323,14 +331,13 @@ while(menuPessoa != 5){
         else{
             clr();
             printf("\nopcao Invalida\n\n");
-            sleep(2);
-
+            //sleep(2);
         }
     }
 }
     
 
-int main()
+/*int menu_DIsciplina()
 {
     int opcaoInicial, opcaoPessoa, opcaoDisciplina;
     Escola escola;
@@ -363,35 +370,35 @@ int main()
                 //Cadastrar pessoa
                 clr();
                 printf("\nCadastrar"); 
-                sleep(2);
+                //sleep(2);
                 break;
 
                 case 2:
                 //Exibir dados de uma pessoa
                 clr();
                 printf("\nAlterar professor");    
-                sleep(2);
+                //sleep(2);
                 break;
 
                 case 3:
                 //Alterar dados da pessoa
                 clr();
                 printf("\nAdicionar aluno"); 
-                sleep(2);
+                //sleep(2);
                 break;
 
                 case 4:
                 //Excluir pessoa
                 clr();
                 printf("\nRemover aluno");   
-                sleep(2);
+                //sleep(2);
                 break;
 
                   case 5:
                 //Voltar ao menu principal
                 clr();
                 printf("\nExibir dados");
-                sleep(2);
+                //sleep(2);
                 break;
 
                 case 6:
@@ -403,17 +410,16 @@ int main()
         else{
             clr();
             printf("\nopcao Invalida\n\n");
-            sleep(2);
-
+            //sleep(2);
         }
     }
     
 }
-
+*/
 int main (){
 
-menu_Principal();
+    menu_Principal();
 
-return 0;
+    return 0;
 
 }
