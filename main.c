@@ -2,7 +2,7 @@
 #include <string.h>
 #include <stdlib.h>
 #if def_WIN32
-#include<Windows.h>
+#include <Windows.h>
 #else
 #include <unistd.h>
 #endif
@@ -55,10 +55,11 @@ void clr()
     printf("\ec\e[3J");
 }
 
-int cadastraAluno(Escola *escola)
+int cadastraPessoa(Escola *escola, int contador)
 {
     char entrada[100];
-    scanf("%s", entrada);
+    scanf("%[^\n]s", entrada);
+    getchar();
     //printf("%s", entrada);
     printf("\n");
     char pVirgula[3];
@@ -104,18 +105,22 @@ int cadastraAluno(Escola *escola)
         char rg[8]; //RG do aluno
         char dtNsc[11]; //Data de nascimento do aluno
         char cep [9]; //CEP do aluno
-
+        //nome;sobrenome;0;CPF;RG;DD/MM/AAAA;0;CEP;0
+       
         printf("Brasileiro, não PcD e Aluno\n");
+
         int i, j;
+       
         for (i = 0, j = 0; i < strlen(entrada); i++)
         {
+            
     	 	if(entrada[i] == ';'){
             	cont ++;
 	            //TODO: separar os dados para gravar o tipo de pessoa.
             }
             if(cont == 0 && entrada[i] != ';'){
                 nome[j] = entrada[i];
-            	escola->alunos->nome[j] = entrada[i];
+            	escola->alunos[contador].nome[j] = entrada[i];
                 j++;
             } 
         }
@@ -126,7 +131,7 @@ int cadastraAluno(Escola *escola)
             }
         	if (cont == 1 && entrada[i] != ';'){
                 sobrenome[j] = entrada[i];
-                escola->alunos->sobrenome[j] = entrada[i];
+                escola->alunos[contador].sobrenome[j] = entrada[i];
                 j++;
             }
 		}
@@ -137,7 +142,7 @@ int cadastraAluno(Escola *escola)
             }
 			if (cont == 3 && entrada[i] != ';'){
                 cpf[j] = entrada[i];
-                escola->alunos->cpf[j] = entrada[i];
+                escola->alunos[contador].cpf[j] = entrada[i];
                 j++;
             }
 		}
@@ -148,7 +153,7 @@ int cadastraAluno(Escola *escola)
             }
 			if (cont == 4 && entrada[i] != ';'){
                 rg[j] = entrada[i];
-                escola->alunos->rg[j] = entrada[i];
+                escola->alunos[contador].rg[j] = entrada[i];
                 j++;
             }
         }
@@ -159,7 +164,7 @@ int cadastraAluno(Escola *escola)
             }
 			if (cont == 5 && entrada[i] != ';'){
                 dtNsc[j] = entrada[i];
-                escola->alunos->dt_nasc[j] = entrada[i];
+                escola->alunos[contador].dt_nasc[j] = entrada[i];
                 j++;
             }
 		}
@@ -170,26 +175,10 @@ int cadastraAluno(Escola *escola)
             }
 			if (cont == 7 && entrada[i] != ';'){
             	cep[j] = entrada[i];
-                escola->alunos->cep[j] = entrada[i];
+                escola->alunos[contador].cep[j] = entrada[i];
                 j++;
             }
 		}
-
-        //printf("%s\n", nome); 
-        //printf("%s\n", escola->alunos->nome);
-        //printf("%s\n", sobrenome); 
-        //printf("%s\n",escola->alunos->sobrenome);
-        //printf("%s\n", cpf); 
-        //printf("%s\n", escola->alunos->cpf);
-        //printf("%s\n", rg); 
-        //printf("%s\n", escola->alunos->rg);
-        //printf("%s\n", dtNsc); 
-        //printf("%s\n", escola->alunos->dt_nasc);
-        //printf("%s\n", cep); 
-        //printf("%s\n", escola->alunos->cep);
-        
-        //scanf("%s", entrada);
-
         return 1;
         
     }else if (pVirgula[0] == '0' && pVirgula[1] == '1' && pVirgula[2] == '0')
@@ -220,12 +209,13 @@ void menu_Principal(){
     menuPrincipal = 0;
     menuPessoa = 0;
     while(menuPrincipal != 3){
-        clr();
+        //clr();
         printf("1 - Sistema de Pessoas\n");
         printf("2 - Sistema de Disciplina\n");
         printf("3 - Sair do Sistema\n");
         printf("\nDigite a opcao: ");
         scanf("%i", &menuPrincipal);
+        getchar();
 
         if(menuPrincipal == 0 ||menuPrincipal == 1 || menuPrincipal == 2 || menuPrincipal == 3){
             
@@ -254,7 +244,7 @@ void menu_Principal(){
             }
         }
         else{
-            clr();
+            //clr();
             printf("\nopcao Invalida\n\n");
             sleep(2);
   
@@ -266,8 +256,10 @@ void menu_Pessoa(){
     menuDisciplina = 0;
     menuPrincipal = 0;
     menuPessoa = 0;
-while(menuPessoa != 5){
-        clr();
+    int contador = 0;
+    Escola escola;
+    while(menuPessoa != 5){
+        //clr();
         printf("1 - Cadastrar pessoa\n");
         printf("2 - Exibir dados de uma pessoa\n");
         printf("3 - Alterar dados da pessoa\n");
@@ -275,6 +267,7 @@ while(menuPessoa != 5){
         printf("5 - Voltar ao menu principal\n");
         printf("\nDigite a opcao: ");
         scanf("%i", &menuPessoa);
+        getchar();
 
         if(menuPessoa == 0 || menuPessoa == 1 || menuPessoa == 2 || menuPessoa == 3 || menuPessoa == 4 || menuPessoa == 5){
             
@@ -286,30 +279,50 @@ while(menuPessoa != 5){
                 break;
 
                 case 1:
-
-                //Cadastrar pessoa
-                clr();
-                printf("\nCadastrar");
+                printf("\nDigite os dados a cadastrar separados por ';'.\n");
+                if(cadastraPessoa(&escola, contador) == 1)
+                {
+                    printf("Aluno Cadastrado!\n");
+                    printf("TESTE + %s", escola.alunos[0].dt_nasc);  
+                    //sleep(1);  
+                    contador++;
+                }
+                ////clr();
+                
                 sleep(2);
                 break;
 
                 case 2:
                 //Exibir dados de uma pessoa
-                clr();
-                printf("\nExibir");
-                sleep(2);
+                ////clr();
+                printf("\nExibir\n");
+                
+                for (int i = 0; i < contador; i++)
+                {
+                    printf("Aluno [%d]: \n", (i));
+                    printf("Nome: %s\n", escola.alunos[i].nome);
+                    printf("Sobrenome: %s\n", escola.alunos[i].sobrenome);
+                    printf("CPF: %s\n", escola.alunos[i].cpf);
+                    printf("RG: %s\n", escola.alunos[i].rg);
+                    printf("CEP: %s\n", escola.alunos[i].cep);
+                    printf("Data de Nascimento: %s\n", escola.alunos[i].dt_nasc);
+                    printf("\n");
+                }
+                
+
+                sleep(1);
                 break;
 
                 case 3:
                 //Alterar dados da pessoa
-                clr();
+                ////clr();
                 printf("\nExcluir"); 
                 sleep(2);
                 break;
 
                   case 4:
                 //Excluir pessoa
-                clr();
+                ////clr();
                 printf("\nExcluir");  
                 sleep(2);
                 break;
@@ -321,7 +334,7 @@ while(menuPessoa != 5){
             }
         }
         else{
-            clr();
+            ////clr();
             printf("\nopcao Invalida\n\n");
             sleep(2);
 
@@ -330,7 +343,7 @@ while(menuPessoa != 5){
 }
     
 
-int main()
+void menu_Disciplina()
 {
     int opcaoInicial, opcaoPessoa, opcaoDisciplina;
     Escola escola;
@@ -339,7 +352,7 @@ int main()
     menuPessoa = 0;
 
     while(menuPessoa != 5){
-        clr();
+        ////clr();
         printf("1 - Cadastrar disciplina\n");
         printf("2 - Alterar professor da disciplina\n");
         printf("3 - Adicionar aluno na disciplina\n");
@@ -348,6 +361,7 @@ int main()
         printf("6 - Voltar ao menu principal\n");
         printf("\nDigite a opcao: ");
         scanf("%i", &menuDisciplina);
+        getchar();
 
         if(menuDisciplina == 0 || menuDisciplina == 1 || menuDisciplina == 2 || menuDisciplina == 3 || menuDisciplina == 4 || menuDisciplina == 5 || menuDisciplina == 6){
             
@@ -361,35 +375,35 @@ int main()
                 case 1:
 
                 //Cadastrar pessoa
-                clr();
+                ////clr();
                 printf("\nCadastrar"); 
                 sleep(2);
                 break;
 
                 case 2:
                 //Exibir dados de uma pessoa
-                clr();
+                ////clr();
                 printf("\nAlterar professor");    
                 sleep(2);
                 break;
 
                 case 3:
                 //Alterar dados da pessoa
-                clr();
+                ////clr();
                 printf("\nAdicionar aluno"); 
                 sleep(2);
                 break;
 
                 case 4:
                 //Excluir pessoa
-                clr();
+                ////clr();
                 printf("\nRemover aluno");   
                 sleep(2);
                 break;
 
                   case 5:
                 //Voltar ao menu principal
-                clr();
+                ////clr();
                 printf("\nExibir dados");
                 sleep(2);
                 break;
@@ -401,7 +415,7 @@ int main()
             }
         }
         else{
-            clr();
+            ////clr();
             printf("\nopcao Invalida\n\n");
             sleep(2);
 
