@@ -66,6 +66,7 @@ void menu_Principal(){
         printf("3 - Sair do Sistema\n");
         printf("\nDigite a opcao: ");
         scanf("%i", &menuPrincipal);
+        getchar();
 
         if(menuPrincipal == 0 ||menuPrincipal == 1 || menuPrincipal == 2 || menuPrincipal == 3){
             
@@ -116,6 +117,7 @@ while(menuPessoa != 5){
         printf("5 - Voltar ao menu principal\n");
         printf("\nDigite a opcao: ");
         scanf("%i", &menuPessoa);
+        getchar();
 
         if(menuPessoa == 0 || menuPessoa == 1 || menuPessoa == 2 || menuPessoa == 3 || menuPessoa == 4 || menuPessoa == 5){
             
@@ -188,6 +190,7 @@ void menu_Disciplina(){
         printf("6 - Voltar ao menu principal\n");
         printf("\nDigite a opcao: ");
         scanf("%i", &menuDisciplina);
+        getchar();
 
         if(menuDisciplina == 0 || menuDisciplina == 1 || menuDisciplina == 2 || menuDisciplina == 3 || menuDisciplina == 4 || menuDisciplina == 5 || menuDisciplina == 6){
             
