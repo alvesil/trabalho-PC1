@@ -14,6 +14,7 @@ typedef struct
     int proforaluno;
     int matricula[5];
     int matricula2;
+    int pis;
 
 } Pessoa;
 
