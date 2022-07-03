@@ -11,13 +11,9 @@
 #include <unistd.h>
 #endif
 
-//void menu_Disciplina(); 
-
-
 int main (){
 
     menu_Principal();
-
     return 0;
 
 }
