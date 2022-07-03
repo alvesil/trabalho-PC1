@@ -3,12 +3,14 @@ int menuPrincipal, menuPessoa, menuDisciplina;
 void menu_Pessoa();
 void menu_Principal();
 
-void menu_Principal(){
+void menu_Principal()
+{
     menuDisciplina = 0;
     menuPrincipal = 0;
     menuPessoa = 0;
-    while(menuPrincipal != 3){
-        //clr();
+    while (menuPrincipal != 3)
+    {
+        // clr();
         printf("1 - Sistema de Pessoas\n");
         printf("2 - Sistema de Disciplina\n");
         printf("3 - Sair do Sistema\n");
@@ -16,48 +18,53 @@ void menu_Principal(){
         scanf("%i", &menuPrincipal);
         getchar();
 
-        if(menuPrincipal == 0 ||menuPrincipal == 1 || menuPrincipal == 2 || menuPrincipal == 3){
-            
-            switch(menuPrincipal){
+        if (menuPrincipal == 0 || menuPrincipal == 1 || menuPrincipal == 2 || menuPrincipal == 3)
+        {
 
-                case 0:
-                //zera as op��es
+            switch (menuPrincipal)
+            {
+
+            case 0:
+                // zera as op��es
                 menu_Principal();
                 break;
 
-                case 1:
+            case 1:
 
-                //Sistema de Pessoas
+                // Sistema de Pessoas
                 menu_Pessoa();
                 break;
 
-                case 2:
-                //sistema de Disciplina
-                //menu_Disciplina();                
+            case 2:
+                // sistema de Disciplina
+                // menu_Disciplina();
                 break;
 
-                case 3:
-                //Sair do Sistema
+            case 3:
+                // Sair do Sistema
                 exit(1);
                 break;
             }
         }
-        else{
-            //clr();
+        else
+        {
+            // clr();
             printf("\nopcao Invalida\n\n");
-        //sleep(2);
+            // sleep(2);
         }
     }
 }
 
-void menu_Pessoa(){
+void menu_Pessoa()
+{
     menuDisciplina = 0;
     menuPrincipal = 0;
     menuPessoa = 0;
     int contador = 0;
     Escola escola;
-    while(menuPessoa != 5){
-        //clr();
+    while (menuPessoa != 5)
+    {
+        // clr();
         printf("1 - Cadastrar pessoa\n");
         printf("2 - Exibir dados de uma pessoa\n");
         printf("3 - Alterar dados da pessoa\n");
@@ -67,91 +74,79 @@ void menu_Pessoa(){
         scanf("%i", &menuPessoa);
         getchar();
 
-        if(menuPessoa == 0 || menuPessoa == 1 || menuPessoa == 2 || menuPessoa == 3 || menuPessoa == 4 || menuPessoa == 5){
-            
-            switch(menuPessoa){
-                case 0: 
+        if (menuPessoa == 0 || menuPessoa == 1 || menuPessoa == 2 || menuPessoa == 3 || menuPessoa == 4 || menuPessoa == 5)
+        {
 
-                //zera as opc�es
+            switch (menuPessoa)
+            {
+            case 0:
+
+                // zera as opc�es
                 menu_Pessoa();
                 break;
 
-                case 1:
+            case 1:
                 printf("\nDigite os dados a cadastrar separados por ';'.\n");
-                if(cadastraPessoa(&escola, contador) == 1)
+                if (cadastraPessoa(&escola, contador) == 1)
                 {
-                    printf("Aluno Cadastrado!\n");  
-                    //sleep(1);  
+                    printf("Aluno Cadastrado!\n");
+                    // sleep(1);
                     contador++;
                 }
                 ////clr();
-                
+
                 break;
 
-                case 2:
-                //Exibir dados de uma pessoa
+            case 2:
+                // Exibir dados de uma pessoa
                 ////clr();
-                printf("\nExibir\n");
+                //printf("\nExibir\n");
+                mostraPessoa(&escola, contador);
+                // for (int i = 0; i < contador; i++)
+                // {
+                //     printf("Matrícula: ");
+                //     printf("%d", escola.alunos[i].matricula);
+                //     printf("\nAluno [%d]: \n", (i));
+                //     printf("Nome: %s\n", escola.alunos[i].nome);
+                //     printf("Sobrenome: %s\n", escola.alunos[i].sobrenome);
+                //     printf("CPF: %s\n", escola.alunos[i].cpf);
+                //     printf("RG: %s\n", escola.alunos[i].rg);
+                //     printf("CEP: %s\n", escola.alunos[i].cep);
+                //     printf("Data de Nascimento: %s\n", escola.alunos[i].dt_nasc);
+                //     printf("\n");
+                // }
 
-                for (int i = 0; i < contador; i++)
-                {
-                    printf("Matrícula: ");
-                    if (escola.alunos[contador].matricula2 < 10)
-                    {
-                        for (int i = 0; i < 4; i++)
-                        {
-                            printf("%d", escola.alunos[i].matricula[i]);
-                        }
-                    }else{
-                        for (int i = 0; i < 3; i++)
-                        {
-                            printf("%d", escola.alunos[i].matricula[i]);
-                        }
-                    }
-                    
-                    printf("%d", escola.alunos[i].matricula2);
-                    printf("\nAluno [%d]: \n", (i));
-                    printf("Nome: %s\n", escola.alunos[i].nome);
-                    printf("Sobrenome: %s\n", escola.alunos[i].sobrenome);
-                    printf("CPF: %s\n", escola.alunos[i].cpf);
-                    printf("RG: %s\n", escola.alunos[i].rg);
-                    printf("CEP: %s\n", escola.alunos[i].cep);
-                    printf("Data de Nascimento: %s\n", escola.alunos[i].dt_nasc);
-                    printf("\n");
-                }
-                
-
-                //sleep(1);
+                // sleep(1);
                 break;
 
-                case 3:
-                //Alterar dados da pessoa
+            case 3:
+                // Alterar dados da pessoa
                 ////clr();
-                printf("\nExcluir"); 
-                //sleep(2);
+                printf("\nExcluir");
+                // sleep(2);
                 break;
 
-                  case 4:
-                //Excluir pessoa
+            case 4:
+                // Excluir pessoa
                 ////clr();
-                printf("\nExcluir");  
-                //sleep(2);
+                printf("\nExcluir");
+                // sleep(2);
                 break;
 
-                case 5:
-                //Voltar ao menu principal
+            case 5:
+                // Voltar ao menu principal
                 menu_Principal();
                 break;
             }
         }
-        else{
+        else
+        {
             ////clr();
             printf("\nopcao Invalida\n\n");
-            //sleep(2);
+            // sleep(2);
         }
     }
 }
-    
 
 void menu_Disciplina()
 {
@@ -161,7 +156,8 @@ void menu_Disciplina()
     menuPrincipal = 0;
     menuPessoa = 0;
 
-    while(menuPessoa != 5){
+    while (menuPessoa != 5)
+    {
         ////clr();
         printf("1 - Cadastrar disciplina\n");
         printf("2 - Alterar professor da disciplina\n");
@@ -173,62 +169,64 @@ void menu_Disciplina()
         scanf("%i", &menuDisciplina);
         getchar();
 
-        if(menuDisciplina == 0 || menuDisciplina == 1 || menuDisciplina == 2 || menuDisciplina == 3 || menuDisciplina == 4 || menuDisciplina == 5 || menuDisciplina == 6){
-            
-            switch(menuDisciplina){
-                case 0: 
+        if (menuDisciplina == 0 || menuDisciplina == 1 || menuDisciplina == 2 || menuDisciplina == 3 || menuDisciplina == 4 || menuDisciplina == 5 || menuDisciplina == 6)
+        {
 
-                //zera as opc�es
+            switch (menuDisciplina)
+            {
+            case 0:
+
+                // zera as opc�es
                 menu_Disciplina();
                 break;
 
-                case 1:
+            case 1:
 
-                //Cadastrar pessoa
+                // Cadastrar pessoa
                 ////clr();
-                printf("\nCadastrar"); 
-                //sleep(2);
+                printf("\nCadastrar");
+                // sleep(2);
                 break;
 
-                case 2:
-                //Exibir dados de uma pessoa
+            case 2:
+                // Exibir dados de uma pessoa
                 ////clr();
-                printf("\nAlterar professor");    
-                //sleep(2);
+                printf("\nAlterar professor");
+                // sleep(2);
                 break;
 
-                case 3:
-                //Alterar dados da pessoa
+            case 3:
+                // Alterar dados da pessoa
                 ////clr();
-                printf("\nAdicionar aluno"); 
-                //sleep(2);
+                printf("\nAdicionar aluno");
+                // sleep(2);
                 break;
 
-                case 4:
-                //Excluir pessoa
+            case 4:
+                // Excluir pessoa
                 ////clr();
-                printf("\nRemover aluno");   
-                //sleep(2);
+                printf("\nRemover aluno");
+                // sleep(2);
                 break;
 
-                  case 5:
-                //Voltar ao menu principal
+            case 5:
+                // Voltar ao menu principal
                 ////clr();
                 printf("\nExibir dados");
-                //sleep(2);
+                // sleep(2);
                 break;
 
-                case 6:
-                //Voltar ao menu principal
+            case 6:
+                // Voltar ao menu principal
                 menu_Principal();
                 break;
             }
         }
-        else{
+        else
+        {
             ////clr();
             printf("\nopcao Invalida\n\n");
-            //sleep(2);
+            // sleep(2);
         }
     }
-    
 }

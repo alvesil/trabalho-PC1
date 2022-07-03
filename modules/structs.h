@@ -12,9 +12,8 @@ typedef struct
     char laudo[10];
     char cep[9];
     int proforaluno;
-    int matricula[5];
-    int matricula2;
-    int pis;
+    int matricula;
+    char pis;
 
 } Pessoa;
 

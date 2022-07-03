@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <time.h>
 #include "modules/structs.h"
 #include "modules/metodos.h"
 #include "modules/menus.h"
