@@ -1,6 +1,11 @@
 #include<stdio.h>
 #include <stdlib.h>
 
+#ifndef menu.h
+    #define menu.h
+    #include "structs.h"
+
+
 #if def_WIN32
 #include <Windows.h>
 #else
@@ -8,6 +13,10 @@
 #endif
 
 int menuPrincipal, menuPessoa, menuDisciplina;
+
+void menu_Pessoa();
+void menu_Principal();
+void menu_Disciplina();
 
 void clr()
 {
@@ -211,3 +220,5 @@ void menu_Disciplina(){
     }
     
 }
+
+#endif
