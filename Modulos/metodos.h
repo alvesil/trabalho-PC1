@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <time.h>
 #include <string.h>
-
+#include "structs.h"
 
 int contadorMatriculaAluno = 0, contadorPIS = 0;
 
