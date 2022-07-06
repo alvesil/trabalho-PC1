@@ -1,7 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "structs.h"
-#include "menu.h"
+#include <string.h>
+
+#include "Modulos\menu.h"
+
 
 #if def_WIN32
 #include <Windows.h>
