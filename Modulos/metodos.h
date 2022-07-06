@@ -2,9 +2,6 @@
 #include <time.h>
 #include <string.h>
 
-#ifndef metodos_h
-    #define metodos_h
-    #include "structs.h"
 
 int contadorMatriculaAluno = 0, contadorPIS = 0;
 
@@ -1165,5 +1162,3 @@ int cadastraPessoa(Escola *escola, int contador)
 
     return 0;
 }
-
-#endif
