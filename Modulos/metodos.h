@@ -16,7 +16,7 @@ void mostraPessoa(Escola *escola, int contador)
     int menu1 = 0;
     int matricula = 0;
     int pis = 0;
-    printf("1-Aluno \n2-Professor \n3-Voltar \n");
+    printf("\n1-Aluno \n2-Professor \n3-Voltar \n");
     scanf("%i", &menu1);
     getchar();
     switch (menu1)
