@@ -1,10 +1,10 @@
 #include<stdio.h>
 #include <stdlib.h>
 
-//#ifndef menu_h
-    //#define menu_h
-    //#include "structs.h"
-   // #include "metodos.h"
+#ifndef menu_h
+    #define menu_h
+    #include "structs.h"
+    #include "metodos.h"
 
 
 #if def_WIN32
@@ -14,14 +14,6 @@
 #endif
 
 int menuPrincipal, menuPessoa, menuDisciplina, contador;
-
-Escola escola;
-
-
-void menu_Pessoa();
-void menu_Principal();
-void menu_Disciplina();
-
 
 void menu_Principal(){
     menuDisciplina = 0;
@@ -75,6 +67,7 @@ void menu_Pessoa(){
     menuDisciplina = 0;
     menuPrincipal = 0;
     menuPessoa = 0;
+    Escola escola;
 while(menuPessoa != 5){
         clr();
         printf("---------PESSOA---------\n");
@@ -86,7 +79,7 @@ while(menuPessoa != 5){
         printf("\nDigite a opcao: ");
         scanf("%i", &menuPessoa);
         getchar();
-Escola escola;
+
         if(menuPessoa == 0 || menuPessoa == 1 || menuPessoa == 2 || menuPessoa == 3 || menuPessoa == 4 || menuPessoa == 5){
             
             switch(menuPessoa){
@@ -108,7 +101,7 @@ Escola escola;
                 //Exibir dados de uma pessoa
                 clr();
                 printf("\nExibir");
-                // mostraPessoa(&escola, contador);
+                mostraPessoa(&escola, contador);
                 sleep(2);
                 break;
 
@@ -222,4 +215,4 @@ void menu_Disciplina(){
     
 }
 
-//#endif
+#endif

@@ -3,10 +3,12 @@
 #include <string.h>
 
 #ifndef metodos_h
-    #define menu_h
+    #define metodos_h
     #include "structs.h"
 
 int contadorMatriculaAluno = 0, contadorPIS = 0;
+
+
 void clr()
 {
     printf("\ec\e[3J");
