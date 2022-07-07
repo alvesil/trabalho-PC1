@@ -1,7 +1,11 @@
 #include <stdio.h>
 #include <time.h>
 #include <string.h>
-#include "structs.h"
+
+#ifndef menu_h
+    #define menu_h
+    #include "structs.h"
+
 
 int contadorMatriculaAluno = 0, contadorPIS = 0;
 
@@ -1162,3 +1166,5 @@ int cadastraPessoa(Escola *escola, int contador)
 
     return 0;
 }
+
+#endif
