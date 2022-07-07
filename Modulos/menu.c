@@ -1,7 +1,7 @@
 #include<stdio.h>
 #include <stdlib.h>
 #include "menu.h"
-#include "structs.h"
+#include "metodos.h"
 
 
 #if def_WIN32
@@ -18,7 +18,6 @@ extern Escola escola;
 
 void menu_Pessoa();
 void menu_Disciplina();
-
 void menu_Principal(){
     
     menuDisciplina = 0;
