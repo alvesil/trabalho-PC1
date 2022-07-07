@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "Modulos\structs.h"
 #include "Modulos\metodos.h"
 #include "Modulos\menu.h"
 #include "Modulos\diciplina.h"
@@ -14,6 +13,7 @@
 #include <unistd.h>
 #endif
 
+void menu_Principal();
 
 int main (){
 
