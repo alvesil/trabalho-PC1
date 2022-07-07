@@ -3,7 +3,9 @@
 #include <string.h>
 #include "metodos.h"
 
-int contadorMatriculaAluno , contadorPIS;
+int contadorMatriculaAluno , contadorPIS, i, j;
+char substituicao_char1;
+
 
 
 
@@ -14,6 +16,10 @@ void clr()
 
 void mostraPessoa(Escola *escola, int contador)
 {
+    for (i = 0; i < 20; i++)
+{
+    escola->alunos[contador].nome[i] = ' ';
+}
     int menu1 = 0;
     int matricula = 0;
     int pis = 0;
@@ -110,6 +116,7 @@ int cadastraPessoa(Escola *escola, int contador)
     // printf("%s", entrada);
     printf("\n");
     char pVirgula[2];
+    substituicao_char1 = entrada[0];   
     // printf("%d", strlen(entrada));
     int cont = 0;
     int cont2 = 0;
@@ -119,7 +126,7 @@ int cadastraPessoa(Escola *escola, int contador)
     Laço de repetição para verificar se foi digitado o padrão correto
     001, 010, 100... etc. E com base nisso cadastrar a pessoa.
     */
-    int i, j;
+   
     for (i = 0; i < strlen(entrada); i++)
     {
         if (entrada[i] == ';')
@@ -260,7 +267,6 @@ int cadastraPessoa(Escola *escola, int contador)
 
             printf("Brasileiro, não PcD e Aluno\n");
 
-            int i, j;
             long int matricula = 0;
 
             /* Incrementa a Matrícula se Aluno */
@@ -278,8 +284,11 @@ int cadastraPessoa(Escola *escola, int contador)
 
             escola->alunos[contador].matricula = anoAtual;
             contadorMatriculaAluno++;
-
-            for (i = 0, j = 0; i < strlen(entrada); i++)
+            //printf("\nsubstituicao_char1 de entrada: %c\n",escola->alunos[contador].nome[0]);
+           escola->alunos[contador].nome[0] = substituicao_char1;
+           // printf("\nsubstituicao_char1 de atribuição: %c\n", escola->alunos[contador].nome[0]);
+           j = 0;
+            for (i = 0; i < strlen(entrada); i++)
             {
 
                 if (entrada[i] == ';')
@@ -288,6 +297,7 @@ int cadastraPessoa(Escola *escola, int contador)
                 }
                 if (cont == 0 && entrada[i] != ';')
                 {
+                    escola->alunos[contador].nome[0] = substituicao_char1; // gambiarra do nome que nem Deus sabe pq o erro
                     escola->alunos[contador].nome[j] = entrada[i];
                     j++;
                 }
@@ -368,7 +378,7 @@ int cadastraPessoa(Escola *escola, int contador)
             cont = 0;
             // nome;sobrenome;0;CPF;RG;DD/MM/AAAA;1;laudo;CEP;0
 
-            int i, j;
+         
             long int matricula = 0;
 
             /* Incrementa a Matrícula se Aluno */
@@ -489,7 +499,7 @@ int cadastraPessoa(Escola *escola, int contador)
             cont = 0;
             // nome;sobrenome;0;CPF;RG;DD/MM/AAAA;0;CEP;1;pis
 
-            int i, j;
+ 
             long int matricula = 0;
 
             for (i = 0, j = 0; i < strlen(entrada); i++)
@@ -594,7 +604,7 @@ int cadastraPessoa(Escola *escola, int contador)
             cont = 0;
             // nome;sobrenome;0;CPF;RG;DD/MM/AAAA;1;laudo;CEP;1;pis
 
-            int i, j;
+
             long int matricula = 0;
 
             for (i = 0, j = 0; i < strlen(entrada); i++)
@@ -710,7 +720,7 @@ int cadastraPessoa(Escola *escola, int contador)
         {
             printf("Estrangeiro, não PcD e Aluno\n");
 
-            int i, j;
+    
             long int matricula = 0;
             // nome;sobrenome;1;passaporte;paisOrigem;DD/MM/AAAA;0;CEP;0
             /* Incrementa a Matrícula se Aluno */
@@ -817,7 +827,7 @@ int cadastraPessoa(Escola *escola, int contador)
             printf("Estrangeiro, PcD e Aluno\n");
             // nome;sobrenome;1;passaporte;paisOrigem;DD/MM/AAAA;1;laudo;CEP;0
 
-            int i, j;
+
             long int matricula = 0;
 
             /* Incrementa a Matrícula se Aluno */
@@ -938,7 +948,7 @@ int cadastraPessoa(Escola *escola, int contador)
             cont = 0;
             // nome;sobrenome;1;passaporte;paisOrigem;DD/MM/AAAA;0;CEP;1;pis
 
-            int i, j;
+     
             long int matricula = 0;
 
             for (i = 0, j = 0; i < strlen(entrada); i++)
@@ -1043,7 +1053,7 @@ int cadastraPessoa(Escola *escola, int contador)
             cont = 0;
             // nome;sobrenome;1;passaporte;paisOrigem;DD/MM/AAAA;1;laudo;CEP;1;pis
 
-            int i, j;
+    
             long int matricula = 0;
 
             for (i = 0, j = 0; i < strlen(entrada); i++)
