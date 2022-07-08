@@ -2,6 +2,7 @@
 int menuPrincipal, menuPessoa, menuDisciplina;
 void menu_Pessoa();
 void menu_Principal();
+Escola escola;
 
 void menu_Principal()
 {
@@ -61,7 +62,7 @@ void menu_Pessoa()
     menuPrincipal = 0;
     menuPessoa = 0;
     int contador = 0;
-    Escola escola;
+
     while (menuPessoa != 5)
     {
         // clr();
@@ -151,7 +152,6 @@ void menu_Pessoa()
 void menu_Disciplina()
 {
     int opcaoInicial, opcaoPessoa, opcaoDisciplina;
-    Escola escola;
     menuDisciplina = 0;
     menuPrincipal = 0;
     menuPessoa = 0;

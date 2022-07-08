@@ -9,16 +9,15 @@ void mostraPessoa(Escola *escola, int contador)
 {
     int menu1 = 0;
     int matricula = 0;
-    int pis = 0;
+    char pis[12];
     printf("1-Aluno \n2-Professor \n3-Voltar \n");
     scanf("%i", &menu1);
-    getchar();
+
     switch (menu1)
     {
     case 1:
         printf("Digite a matricula: ");
         scanf("%d", &matricula);
-        getchar();
 
         int aux = 0;
         for (int i = 0; i < contador; i++)
@@ -55,8 +54,14 @@ void mostraPessoa(Escola *escola, int contador)
         break;
     case 2:
         printf("Digite o PIS: ");
-        scanf("%d", &pis);
+        scanf("%s", pis);
         getchar();
+        printf("1: %d\n", pis);
+        printf("2: %d\n", escola->professores[0].pis);
+        printf("3: %S\n", escola->professores[0].nome);
+        printf("4: %S\n", escola->professores[0].sobrenome);
+        printf("5: %S\n", escola->professores[0].dt_nasc);
+        
         for (int i = 0; i < contador; i++)
         {
             if (pis == escola->professores[i].pis)
@@ -105,145 +110,56 @@ int cadastraPessoa(Escola *escola, int contador)
     char pVirgula[2];
     // printf("%d", strlen(entrada));
     int cont = 0;
-    int cont2 = 0;
-    int cont3 = 0;
 
     /*
     Laço de repetição para verificar se foi digitado o padrão correto
     001, 010, 100... etc. E com base nisso cadastrar a pessoa.
     */
     int i, j;
+    // for (i = 0; i < strlen(entrada); i++)
+    // {
+    //     if (entrada[i] == ';')
+    //     {
+    //         cont++;
+    //     }
+    // }
+    int teste = 0;
     for (i = 0; i < strlen(entrada); i++)
     {
         if (entrada[i] == ';')
         {
-            cont2++;
-        }
-    }
-    if (cont2 == 8)
-    {
-        for (i = 0; i < strlen(entrada); i++)
-        {
-            if (entrada[i] == ';')
+            if (cont == 1)
             {
-
-                if (cont == 1 || cont == 5 || cont == 7)
+                pVirgula[0] = entrada[i + 1];
+            }
+            if (cont == 5)
+            {
+                pVirgula[1] = entrada[i + 1];
+                if (entrada[i + 1] == '1')
                 {
-                    if (cont == 1)
-                    {
-                        pVirgula[0] = entrada[i + 1];
-                    }
-                    if (cont == 5)
-                    {
-                        pVirgula[1] = entrada[i + 1];
-                    }
-                    if (cont == 7)
-                    {
-                        pVirgula[2] = entrada[i + 1];
-                    }
+                    teste = 8;
                 }
-                cont++;
-            }
-        }
-    }
-    if (cont2 == 9)
-    {
-        for (j = 0; j < strlen(entrada); j++)
-        {
-            if (entrada[j] == ';')
-            {
-                cont3++;
-            }
-            if (cont3 == 9 && entrada[j + 1] == '0')
-            {
-                for (i = 0; i < strlen(entrada); i++)
+                else
                 {
-                    if (entrada[i] == ';')
-                    {
-
-                        if (cont == 1 || cont == 5 || cont == 8)
-                        {
-                            if (cont == 1)
-                            {
-                                pVirgula[0] = entrada[i + 1];
-                            }
-                            if (cont == 5)
-                            {
-                                pVirgula[1] = entrada[i + 1];
-                            }
-                            if (cont == 8)
-                            {
-                                pVirgula[2] = entrada[i + 1];
-                            }
-                        }
-                        cont++;
-                    }
+                    teste = 7;
                 }
             }
-            else
+            if (cont == teste)
             {
-                for (i = 0; i < strlen(entrada); i++)
-                {
-                    if (entrada[i] == ';')
-                    {
-
-                        if (cont == 1 || cont == 5 || cont == 7)
-                        {
-                            if (cont == 1)
-                            {
-                                pVirgula[0] = entrada[i + 1];
-                            }
-                            if (cont == 5)
-                            {
-                                pVirgula[1] = entrada[i + 1];
-                            }
-                            if (cont == 7)
-                            {
-                                pVirgula[2] = entrada[i + 1];
-                            }
-                        }
-                        cont++;
-                    }
-                }
+                pVirgula[2] = entrada[i + 1];
             }
-        }
-    }
-    if (cont2 == 10)
-    {
-        for (i = 0; i < strlen(entrada); i++)
-        {
-            if (entrada[i] == ';')
-            {
-
-                if (cont == 1 || cont == 5 || cont == 8)
-                {
-                    if (cont == 1)
-                    {
-                        pVirgula[0] = entrada[i + 1];
-                    }
-                    if (cont == 5)
-                    {
-                        pVirgula[1] = entrada[i + 1];
-                    }
-                    if (cont == 8)
-                    {
-                        pVirgula[2] = entrada[i + 1];
-                    }
-                }
-                cont++;
-            }
+            cont++;
         }
     }
 
     /*
     Verificar e validar qual o padrão foi digitado.
     */
-    printf("%d\n", cont);
-    printf("%d\n", cont2);
-    printf("%c", pVirgula[0]);
-    printf("%c", pVirgula[1]);
-    printf("%c", pVirgula[2]);
-    if (cont == 8 || cont == 9)
+    // printf("%d\n", cont);
+    // printf("%c", pVirgula[0]);
+    // printf("%c", pVirgula[1]);
+    // printf("%c", pVirgula[2]);
+    if (cont == 8 || cont == 9 || cont == 10)
     {
 
         if (pVirgula[0] == '0' && pVirgula[1] == '0' && pVirgula[2] == '0')
@@ -570,12 +486,13 @@ int cadastraPessoa(Escola *escola, int contador)
                 {
                     cont++;
                 }
-                if (cont == 9 && entrada[i] != ';')
+                if (cont == 8 && entrada[i] != ';')
                 {
-                    escola->professores[contador].pis = entrada[i];
+                    escola->professores[contador].pis[j] = entrada[i];
                     j++;
                 }
             }
+            printf("%s\n", escola->professores[contador].pis);
             escola->alunos[contador].nacionalidade = 0;
             escola->alunos[contador].pcd = 0;
 
@@ -688,14 +605,14 @@ int cadastraPessoa(Escola *escola, int contador)
                 {
                     cont++;
                 }
-                if (cont == 8 && entrada[i] != ';')
+                if (cont == 9 && entrada[i] != ';')
                 {
-                    escola->professores[contador].pis = entrada[i];
+                    escola->professores[contador].pis[j] = entrada[i];
                     j++;
                 }
             }
             escola->alunos[contador].nacionalidade = 0;
-            escola->alunos[contador].pcd = 0;
+            escola->alunos[contador].pcd = 1;
 
             return 1;
         }
@@ -1021,7 +938,7 @@ int cadastraPessoa(Escola *escola, int contador)
                 }
                 if (cont == 8 && entrada[i] != ';')
                 {
-                    escola->professores[contador].pis = entrada[i];
+                    escola->professores[contador].pis[j] = entrada[i];
                     j++;
                 }
             }
@@ -1139,7 +1056,7 @@ int cadastraPessoa(Escola *escola, int contador)
                 }
                 if (cont == 8 && entrada[i] != ';')
                 {
-                    escola->professores[contador].pis = entrada[i];
+                    escola->professores[contador].pis[j] = entrada[i];
                     j++;
                 }
             }
