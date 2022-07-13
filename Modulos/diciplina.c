@@ -43,9 +43,9 @@ while (valida != 0)
     }
 }
 
-        disciplina[contadordiciplina]->professor = escola->professores[i];
+        strcpy(disciplina[contadordiciplina]->professor, escola->professores[i]);
         disciplina[contadordiciplina].cargaHoraria = auxcargahoraria;
-        disciplina[contadordiciplina].nome = auxnomeDiciplina;
+        strcpy(disciplina[contadordiciplina].nome, auxnomeDiciplina);
         disciplina[contadordiciplina].codigo = auxcodigo;
         contadordiciplina++;
 
