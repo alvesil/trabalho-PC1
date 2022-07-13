@@ -1,5 +1,5 @@
-#ifndef MENU_H
-#define MEUNU_H
+#ifndef METODOS_H
+#define METODOS_H
 
 #include <stdio.h>
 #include <time.h>
@@ -20,7 +20,7 @@ typedef struct
     char cep[9];
     int proforaluno;
     int matricula;
-    char pis;
+    char pis [14];
 
 } Pessoa;
 
