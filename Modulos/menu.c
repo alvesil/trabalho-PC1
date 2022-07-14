@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "menu.h"
 #include "metodos.h"
+#include "diciplina.h"
 
 
 #if def_WIN32
@@ -14,7 +15,9 @@ int menuPessoa;
 int menuDisciplina;
 int contador;
 int menuPrincipal;
+int contadordiciplina;
 extern Escola escola;
+extern Disciplina disciplina;
 
 void menu_Pessoa();
 void menu_Disciplina();
@@ -175,8 +178,8 @@ void menu_Disciplina(){
                 case 1:
 
                 //Cadastrar pessoa
-                
-                printf("\nCadastrar"); 
+                cadastrarDisiplina(&escola, &disciplina, contadordiciplina);
+                //printf("\nCadastrar"); 
                 sleep(2);
                 break;
 

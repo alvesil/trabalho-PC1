@@ -20,7 +20,7 @@ typedef struct
     char cep[9];
     int proforaluno;
     int matricula;
-    char pis [14];
+    long int pis ;
 
 } Pessoa;
 
