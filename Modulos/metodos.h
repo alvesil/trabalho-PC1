@@ -27,7 +27,7 @@ typedef struct
 typedef struct
 {
     long int codigo;
-    char nome[20];
+    char nomeDisciplina[20];
     int cargaHoraria;
     Pessoa professor;
     Pessoa aluno[10];

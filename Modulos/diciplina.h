@@ -11,6 +11,7 @@ Disciplina disciplina;
 
 void cadastrarDisiplina(Escola *escolas, Disciplina *disciplina, int contadordiciplina);
 void mudarprofessor(Escola *escola, Disciplina *disciplina, int contadordisciplina);
-void exibirDisciplina(Escola *escola, Disciplina *disciplina);
+void exibirDisciplina(Escola *escola, Disciplina *disciplina, int alunosmatriculados);
+void exibirDisciplina(Escola *escola, Disciplina *disciplina, int alunosmatriculados);
 
 #endif
