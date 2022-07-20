@@ -15,7 +15,7 @@ int menuPessoa;
 int menuDisciplina;
 int contador;
 int menuPrincipal;
-int contadordiciplina;
+int contadordisciplina;
 extern Escola escola;
 extern Disciplina disciplina;
 
@@ -178,15 +178,15 @@ void menu_Disciplina(){
                 case 1:
 
                 //Cadastrar pessoa
-                cadastrarDisiplina(&escola, &disciplina, contadordiciplina);
+                cadastrarDisiplina(&escola, &disciplina, contadordisciplina);
                 //printf("\nCadastrar"); 
                 sleep(2);
                 break;
 
                 case 2:
                 //Exibir dados de uma pessoa
-                
-                printf("\nAlterar professor");    
+                mudarprofessor(&escola, &disciplina, contadordisciplina);
+                //printf("\nAlterar professor");    
                 sleep(2);
                 break;
 
@@ -206,8 +206,8 @@ void menu_Disciplina(){
 
                   case 5:
                 //Voltar ao menu principal
-                
-                printf("\nExibir dados");
+                exibirDisciplina(&escola, &disciplina);
+               // printf("\nExibir dados");
                 sleep(2);
                 break;
 

@@ -7,6 +7,8 @@ void menu_Disciplina();
 
 char auxnomeDiciplina [100];
 long int auxpis;
+char auxnome [20] = "Rafael";
+char auxsobrenome[50] = "Braga";
 
 
 int i, valida = 1, auxcargahoraria;
@@ -24,6 +26,9 @@ void cadastrarDisiplina(Escola *escola,Disciplina *disciplina, int contadordisci
     escola->professores[3].pis = 4;
     escola->professores[4].pis = 5;
 
+   
+    
+
     printf("\nDigite o nome da diciplina: ");
     scanf("%s", auxnomeDiciplina);
     getchar();
@@ -39,6 +44,7 @@ void cadastrarDisiplina(Escola *escola,Disciplina *disciplina, int contadordisci
     for(i = 0; i < 5; i++){
             
             if (escola->professores[i].pis == auxpis){
+               
                 valida = 0;
             }
     }
@@ -55,7 +61,10 @@ void cadastrarDisiplina(Escola *escola,Disciplina *disciplina, int contadordisci
 
     }
 
-    disciplina[contadordisciplina].professor = escola->professores[i];
+    strcpy (escola->professores[i].nome, auxnome);
+    strcpy (escola->professores[i].sobrenome, auxsobrenome);
+    strcpy (disciplina->professor.nome, escola->disciplina[i].professor.nome);
+    strcpy (disciplina->professor.sobrenome, escola->disciplina[i].professor.sobrenome);
     disciplina[contadordisciplina].cargaHoraria = auxcargahoraria;
     strcpy(disciplina[contadordisciplina].nome, auxnomeDiciplina);
     disciplina[contadordisciplina].codigo = auxcodigo;
@@ -72,14 +81,15 @@ void mudarprofessor(Escola *escola, Disciplina *disciplina, int contadordiscipli
     valida = 1;
     int mudar_professor;
 
-    printf("digite o cadigo da materia: ");
+    printf("\ndigite o cadigo da materia: ");
     scanf("%ld",&auxcodigo);
+    getchar();
     for(i = 0; i < 5; i++ ){
         if(disciplina[i].codigo == auxcodigo){
             int valida2 = 1;
             valida = 0;
             mudar_professor = i;
-            printf("\nDigite o numero pis do novo professor: "\n);
+            printf("\nDigite o numero pis do novo professor: ");
             scanf("%ld", &auxpis);
             for(i = 0; i < 5; i++){
             
@@ -93,30 +103,92 @@ void mudarprofessor(Escola *escola, Disciplina *disciplina, int contadordiscipli
                 printf("\n\nDigite o PIS do novo professor: ");
                 scanf("%ld", &auxpis);
                 getchar();
+                for(i = 0; i < 5; i++){
+                    if (escola->professores[i].pis == auxpis){
+                    valida2 = 0;
+                    }
+                }
+
+            }
+        }
+    }
+    while (valida != 0){
+
+        printf("\nMateria nao encontrada\n");
+        printf("\ndigite o cadigo da materia: ");
+        scanf("%ld",&auxcodigo);
+        getchar();
+
+        for(i = 0; i < 5; i++ ){
+        if(disciplina[i].codigo == auxcodigo){
+            int valida2 = 1;
+            valida = 0;
+            mudar_professor = i;
+            printf("\nDigite o numero pis do novo professor: ");
+            scanf("%ld", &auxpis);
             for(i = 0; i < 5; i++){
+            
                 if (escola->professores[i].pis == auxpis){
-                  valida2 = 0;
+                    valida2 = 0;
+                    disciplina[mudar_professor].professor = escola->professores[i];
                 }
             }
+            while (valida2 != 0){
+                printf("\n\nProfessor nao encontrado\n");
+                printf("\n\nDigite o PIS do novo professor: ");
+                scanf("%ld", &auxpis);
+                getchar();
+                for(i = 0; i < 5; i++){
+                    if (escola->professores[i].pis == auxpis){
+                    valida2 = 0;
+                    }
+                }
 
-    }
+            }
         }
     }
-    while (validar != 0)
-    {
-        printf("\nMateria nao encontrada\n");
-        printf("digite o cadigo da materia: ");
-    scanf("%ld",&auxcodigo);
-    for(i = 0; i < 5; i++ ){
-        if(disciplina[i].codigo == auxcodigo){
-
-        }
-    }
+    
     }
     
 }
 
-void addAluno(Escola *escola, Disciplina *diciplinas){
+void addAluno(Escola *escola, Disciplina *disciplinas){
+
+
+
+}
+
+void exibirDisciplina(Escola *escola, Disciplina *disciplina){
+
+printf("\nDigite o codigo da disciplina: ");
+scanf("%ld", &auxcodigo);
+
+    for(i = 0; i < 5; i++ ){
+        if(disciplina[i].codigo == auxcodigo){
+            int valida = 0;
+            printf("\nCodigo da disciplina: %ld" , disciplina[i].codigo);
+            printf("\nNome da Disciplina: %s", disciplina[i].nome);
+            printf("\nNome do Professor: %s %s", disciplina[i].professor.nome, disciplina[i].professor.sobrenome);
+            printf("\n");
+            
+        }
+            while (valida != 0){
+                printf("\n\nDisciplina não encontrada\n");
+                printf("\nDigite o codigo da disciplina: ");
+                scanf("%ld", &auxcodigo);
+                getchar();
+                for(i = 0; i < 5; i++){
+                    if(disciplina[i].codigo == auxcodigo){
+                        valida = 0;
+                        printf("\nCodigo da disciplina: %ld" , disciplina[i].codigo);
+                        printf("\nNome da Disciplina: %s", disciplina[i].nome);
+                        printf("\nNome do Professor: %s %s", disciplina[i].professor.nome, disciplina[i].professor.sobrenome);
+
+                    }
+                }
+
+            }
+    }
 
 
 

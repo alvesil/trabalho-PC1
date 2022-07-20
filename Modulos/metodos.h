@@ -50,4 +50,5 @@ void mostraPessoa(Escola *escola, int contador);
 
 int cadastraPessoa(Escola *escola, int contador);
 
+
 #endif
