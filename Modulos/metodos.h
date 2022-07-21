@@ -29,6 +29,7 @@ typedef struct
     long int codigo;
     char nomeDisciplina[20];
     int cargaHoraria;
+    int quantidadealuno;
     Pessoa professor;
     Pessoa aluno[10];
 

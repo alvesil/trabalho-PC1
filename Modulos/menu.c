@@ -193,7 +193,7 @@ void menu_Disciplina(){
 
                 case 3:
                 //Alterar dados da pessoa
-                exibirDisciplina(Escola *escola, Disciplina *disciplina, int alunosmatriculados);
+                addAluno(&escola, &disciplina);
                 printf("\nAdicionar aluno"); 
                 sleep(2);
                 break;
@@ -207,7 +207,7 @@ void menu_Disciplina(){
 
                   case 5:
                 //Voltar ao menu principal
-                exibirDisciplina(&escola, &disciplina, alunosmatriculados);
+                exibirDisciplina(&escola, &disciplina);
                // printf("\nExibir dados");
                 sleep(2);
                 break;
