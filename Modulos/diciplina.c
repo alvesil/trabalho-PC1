@@ -11,7 +11,7 @@ char auxnome [20] = "Rafael";
 char auxsobrenome[50] = "Braga";
 
 
-int i, valida = 1, auxcargahoraria, alunosmatriculados[5];
+int i, valida = 1, auxcargahoraria, quantidadealuno;
 long int auxcodigo, auxmatricula;
 
 extern Escola escola;
@@ -156,34 +156,43 @@ void mudarprofessor(Escola *escola, Disciplina *disciplina, int contadordiscipli
     
 }
 
-void addAluno(Escola *escola, Disciplina *disciplinas, int alunosmatriculados){
+void addAluno(Escola *escola, Disciplina *disciplina){
+ 
     printf("\nDigite o codigo da disciplina: ");
     scanf("%ls", &auxcodigo);
     getchar();
 
-    int validaadd = 1, validaadd2 = 1, continuaradd = 1;
+    int validaadd = 1, validaadd2 = 1, continuaradd = 1, indice_disciplina = 0;
 
     for(i = 0; i < 5; i++ ){
         if(disciplina[i].codigo == auxcodigo){
             validaadd = 0;
+            indice_disciplina = i;
+            printf("\nquantodade de alunos: %i\n", escola->disciplina[indice_disciplina].quantidadealuno);
             while (continuaradd != 0){
-                if(alunosmatriculados[i] < 10){
+                if(escola->disciplina[indice_disciplina].quantidadealuno < 10){
                     printf("Digite a matricula do aluno");
-                    scanf("%ld", auxmatricula);
+                    scanf("%ld", &auxmatricula);
                     for(i = 0; i < 30; i++){
                         if(escola->alunos[i].matricula == auxmatricula){
                             validaadd2 = 0;
+                            disciplina->aluno[i].matricula = escola->alunos[i].matricula;
+                            strcpy(disciplina->aluno[i].nome, escola->alunos[i].nome);
+                            strcpy(disciplina->aluno[i].sobrenome, escola->alunos[i].sobrenome );
                         }
-
-                        while (validaadd2 != 0){
-                            printf("Digite a matricula do aluno");
-                            scanf("%ld", auxmatricula);
-                            for(i = 0; i < 30; i++){
-                                if(escola->alunos[i].matricula == auxmatricula){
-                                    validaadd2 = 0;
-                                } 
-                            }
-                        
+                    }
+                    while (validaadd2 != 0){
+                        printf("\nAluno nao encontrado\n");
+                        printf("Digite a matricula do aluno");
+                        scanf("%ld", &auxmatricula);
+                        for(i = 0; i < 30; i++){
+                            if(escola->alunos[i].matricula == auxmatricula){
+                                validaadd2 = 0;
+                                disciplina->aluno[i].matricula = escola->alunos[i].matricula;
+                                strcpy(disciplina->aluno[i].nome, escola->alunos[i].nome);
+                                strcpy(disciplina->aluno[i].sobrenome, escola->alunos[i].sobrenome );
+                            } 
+                        }
                     }
                 }
 
@@ -191,6 +200,10 @@ void addAluno(Escola *escola, Disciplina *disciplinas, int alunosmatriculados){
                     printf("\nTurma esta com o maximo de alunos");
                     continuaradd = 0;
                 }
+                escola->disciplina[indice_disciplina].quantidadealuno++;
+                printf("\nDigite 1 para cadastrar outro aluno ou 0 para finalizar: ");
+                scanf("%d", &continuaradd);
+            
             }        
         }
     }
@@ -204,15 +217,45 @@ void addAluno(Escola *escola, Disciplina *disciplinas, int alunosmatriculados){
             if(disciplina[i].codigo == auxcodigo){
                 validaadd = 0;
                 while (continuaradd != 0){
-                    if(alunosmatriculados[i] < 10){
+                    indice_disciplina = i;
+                    printf("\nquantodade de alunos: %i\n", escola->disciplina[indice_disciplina].quantidadealuno);
+                    if(escola->disciplina[indice_disciplina].quantidadealuno < 10){
                         printf("Digite a matricula do aluno");
-                        scanf("%ld", &auxmatricula)
+                        scanf("%ld", &auxmatricula);
+                        for(i = 0; i < 30; i++){
+                            if(escola->alunos[i].matricula == auxmatricula){
+                                validaadd2 = 0;
+                                disciplina->aluno[i].matricula = escola->alunos[i].matricula;
+                                strcpy(disciplina->aluno[i].nome, escola->alunos[i].nome);
+                                strcpy(disciplina->aluno[i].sobrenome, escola->alunos[i].sobrenome );
+                                printf("\nquantodade de alunos: %i\n", escola->disciplina[indice_disciplina].quantidadealuno);
+                            }
+                        }
+                    
+                        while (validaadd2 != 0){
+                            printf("\nAluno nao encontrado\n");
+                            printf("Digite a matricula do aluno");
+                            scanf("%ld", &auxmatricula);
+                            for(i = 0; i < 30; i++){
+                                if(escola->alunos[i].matricula == auxmatricula){
+                                    validaadd2 = 0;
+                                    disciplina->aluno[i].matricula = escola->alunos[i].matricula;
+                                    strcpy(disciplina->aluno[i].nome, escola->alunos[i].nome);
+                                    strcpy(disciplina->aluno[i].sobrenome, escola->alunos[i].sobrenome );
+                                } 
+                            }
+                        }
                     }
 
                     else{
                         printf("\nTurma esta com o maximo de alunos");
                         continuaradd = 0;
                     }
+
+                    escola->disciplina[indice_disciplina].quantidadealuno = escola->disciplina[indice_disciplina].quantidadealuno + 1;
+                    printf("\nDigite 1 para cadastrar outro aluno ou 0 para finalizar: ");
+                    scanf("%d", &continuaradd);
+                    getchar();
                 }            
             }
         }
@@ -220,7 +263,7 @@ void addAluno(Escola *escola, Disciplina *disciplinas, int alunosmatriculados){
 }
 
 
-void exibirDisciplina(Escola *escola, Disciplina *disciplina, int alunosmatriculados){
+void exibirDisciplina(Escola *escola, Disciplina *disciplina){
 
 printf("\n\nDigite o codigo da disciplina: ");
 scanf("%ld", &auxcodigo);
@@ -234,11 +277,13 @@ int validaexibir = 1;
             printf("\nNome da Disciplina: %s", disciplina[i].nomeDisciplina);
             printf("\nNome do Professor: %s %s", disciplina[i].professor.nome, disciplina[i].professor.sobrenome);
             int contador = i;
-            for(i = 0; i < alunosmatriculados[contador]; i++ ){
+            for(i = 0; i < escola->disciplina[contador].quantidadealuno; i++ ){
+                
                 printf("\nAluno %i\n", i);
                 printf("Nome: %s", disciplina[contador].aluno[i].nome);
                 printf("\nMatricula: %ld", disciplina[contador].aluno[i].matricula);
             }
+           
             printf("\n");
             
         }
@@ -254,11 +299,14 @@ int validaexibir = 1;
                         printf("\nNome da Disciplina: %s", disciplina[i].nomeDisciplina);
                         printf("\nNome do Professor: %s %s", disciplina[i].professor.nome, disciplina[i].professor.sobrenome);
                        int contador = i;
-                        for(i = 0; i < alunosmatriculados[contador]; i++ ){
+                       
+                        for(i = 0; i < escola->disciplina[contador].quantidadealuno; i++ ){
+                            
                             printf("\nAluno %i\n", i);
                             printf("Nome: %s", disciplina[contador].aluno[i].nome);
                             printf("\nMatricula: %ld", disciplina[contador].aluno[i].matricula);
                         }
+                        
                         printf("\n");
                     }
                 }
