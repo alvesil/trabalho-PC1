@@ -13,5 +13,6 @@ void cadastrarDisiplina(Escola *escolas, Disciplina *disciplina, int contadordic
 void mudarprofessor(Escola *escola, Disciplina *disciplina, int contadordisciplina);
 void exibirDisciplina(Escola *escola, Disciplina *disciplina);
 void addAluno(Escola *escola, Disciplina *disciplina);
+void excluirAluno (Escola *escola, Disciplina *disciplina);
 
 #endif

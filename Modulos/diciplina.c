@@ -258,7 +258,8 @@ void addAluno(Escola *escola, Disciplina *disciplina){
                         continuaradd = 0;
                     }
 
-                    escola->disciplina[indice_disciplina].quantidadealuno = escola->disciplina[indice_disciplina].quantidadealuno + 1;
+                    quantidadedealunos++;
+                    escola->disciplina[indice_disciplina].quantidadealuno = quantidadedealunos; 
                     printf("\n\nAluno cadastrado com sucesso\n\n");
                     printf("\nDigite 1 para cadastrar outro aluno ou 0 para finalizar: ");
                     scanf("%d", &continuaradd);
@@ -286,7 +287,7 @@ int validaexibir = 1;
             int contador = i;
             for(i = 0; i < escola->disciplina[contador].quantidadealuno; i++ ){
                 
-                printf("\nAluno %i\n", i);
+                printf("\nAluno %i\n", i+1);
                 printf("Nome: %s", disciplina[contador].aluno[i].nome);
                 printf("\nMatricula: %ld", disciplina[contador].aluno[i].matricula);
             }
@@ -309,7 +310,7 @@ int validaexibir = 1;
                        
                         for(i = 0; i < escola->disciplina[contador].quantidadealuno; i++ ){
                             
-                            printf("\nAluno %i\n", i);
+                            printf("\nAluno %i\n", i+1);
                             printf("Nome: %s", disciplina[contador].aluno[i].nome);
                             printf("\nMatricula: %ld", disciplina[contador].aluno[i].matricula);
                         }
@@ -323,4 +324,130 @@ int validaexibir = 1;
 
 
 
+}
+
+void excluirAluno (Escola *escola, Disciplina *disciplina){
+
+printf("\nDigite o codigo da disciplina: ");
+    scanf("%ld", &auxcodigo);
+    getchar();
+
+    int validaadd = 1, validaadd2 = 1, continuaradd = 1, indice_disciplina = 0, quantidadedealunos;
+    
+    for(i = 0; i < 5; i++ ){
+        
+        if(disciplina[i].codigo == auxcodigo){
+            validaadd = 0;
+            indice_disciplina = i;
+            quantidadedealunos = escola->disciplina[indice_disciplina].quantidadealuno;
+            
+            while (continuaradd != 0){
+                if(quantidadedealunos != 0){
+                    printf("\nDigite a matricula do aluno que sera excluido: ");
+                    scanf("%ld", &auxmatricula);
+                    for(i = 0; i < 30; i++){
+                        if(escola->alunos[i].matricula == auxmatricula){
+                            validaadd2 = 0;
+                            disciplina->aluno[i].matricula = disciplina->aluno[quantidadedealunos].matricula;
+                            strcpy(disciplina->aluno[i].nome, disciplina->aluno[quantidadedealunos].nome);
+                            strcpy(disciplina->aluno[i].sobrenome, disciplina->aluno[quantidadedealunos].sobrenome);
+                            disciplina->aluno[i].matricula = 0;
+                            strcpy(disciplina->aluno[i].nome, "");
+                            strcpy(disciplina->aluno[i].sobrenome, "" );
+                        }
+                    }
+                    while (validaadd2 != 0){
+                        printf("\nAluno nao encontrado\n");
+                        printf("\nDigite a matricula do aluno que sera excluido: ");
+                        scanf("%ld", &auxmatricula);
+                        for(i = 0; i < 30; i++){
+                            if(escola->alunos[i].matricula == auxmatricula){
+                                validaadd2 = 0;
+                            disciplina->aluno[i].matricula = disciplina->aluno[quantidadedealunos].matricula;
+                            strcpy(disciplina->aluno[i].nome, disciplina->aluno[quantidadedealunos].nome);
+                            strcpy(disciplina->aluno[i].sobrenome, disciplina->aluno[quantidadedealunos].sobrenome);
+                            disciplina->aluno[i].matricula = 0;
+                            strcpy(disciplina->aluno[i].nome, "");
+                            strcpy(disciplina->aluno[i].sobrenome, "" );
+                            } 
+                        }
+                    }
+                }
+
+                else{
+                    printf("\nTurma no tem alunos cadastrados de alunos");
+                    continuaradd = 0;
+                }
+                quantidadedealunos--;
+                escola->disciplina[indice_disciplina].quantidadealuno = quantidadedealunos;
+                printf("\n\nAluno excluido com sucesso\n\n");
+                printf("\nDigite 1 para excluir outro aluno ou 0 para finalizar: ");
+                scanf("%d", &continuaradd);
+            
+            }        
+        }
+    }
+
+    while (validaadd != 0){
+        printf("\n\nDisciplina nao encontrada\n");
+        printf("\nDigite o codigo da disciplina: ");
+        scanf("%ld", &auxcodigo);
+        getchar();
+        for(i = 0; i < 5; i++){
+            if(disciplina[i].codigo == auxcodigo){
+                validaadd = 0;
+                 indice_disciplina = i;
+                quantidadedealunos = escola->disciplina[indice_disciplina].quantidadealuno;
+                while (continuaradd != 0){
+                    indice_disciplina = i;
+                    
+                    if(quantidadedealunos != 0){
+                        printf("\nDigite a matricula do aluno que sera excluido: ");
+                        scanf("%ld", &auxmatricula);
+                        for(i = 0; i < 30; i++){
+                            if(escola->alunos[i].matricula == auxmatricula){
+                                validaadd2 = 0;
+                                disciplina->aluno[i].matricula = disciplina->aluno[quantidadedealunos].matricula;
+                                strcpy(disciplina->aluno[i].nome, disciplina->aluno[quantidadedealunos].nome);
+                                strcpy(disciplina->aluno[i].sobrenome, disciplina->aluno[quantidadedealunos].sobrenome);
+                                disciplina->aluno[i].matricula = 0;
+                                strcpy(disciplina->aluno[i].nome, "");
+                                strcpy(disciplina->aluno[i].sobrenome, "" );
+                                
+                            }
+                        }
+                    
+                        while (validaadd2 != 0){
+                            printf("\nAluno nao encontrado\n");
+                            printf("\nDigite a matricula do aluno que sera excluido: ");
+                            scanf("%ld", &auxmatricula);
+                            for(i = 0; i < 30; i++){
+                                if(escola->alunos[i].matricula == auxmatricula){
+                                    validaadd2 = 0;
+                                    disciplina->aluno[i].matricula = disciplina->aluno[quantidadedealunos].matricula;
+                                    strcpy(disciplina->aluno[i].nome, disciplina->aluno[quantidadedealunos].nome);
+                                    strcpy(disciplina->aluno[i].sobrenome, disciplina->aluno[quantidadedealunos].sobrenome);
+                                    disciplina->aluno[i].matricula = 0;
+                                    strcpy(disciplina->aluno[i].nome, "");
+                                    strcpy(disciplina->aluno[i].sobrenome, "" );
+                                } 
+                            }
+                        }
+                    }
+
+                    else{
+                        printf("\nTurma esta com o maximo de alunos");
+                        continuaradd = 0;
+                    }
+
+                    quantidadedealunos--;
+                    escola->disciplina[indice_disciplina].quantidadealuno = quantidadedealunos;
+                    printf("\n\nAluno excluido com sucesso\n\n");
+                    printf("\nDigite 1 para excluir outro aluno ou 0 para finalizar: ");
+                    scanf("%d", &continuaradd);
+                    getchar();
+                }            
+            }
+        }
+    }
 }

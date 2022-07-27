@@ -201,7 +201,7 @@ void menu_Disciplina(){
                   case 4:
                 //Excluir pessoa
                 
-                printf("\nRemover aluno");   
+                excluirAluno (&escola, &disciplina);   
                 sleep(2);
                 break;
 
