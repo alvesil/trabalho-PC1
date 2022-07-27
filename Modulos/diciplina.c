@@ -159,19 +159,21 @@ void mudarprofessor(Escola *escola, Disciplina *disciplina, int contadordiscipli
 void addAluno(Escola *escola, Disciplina *disciplina){
  
     printf("\nDigite o codigo da disciplina: ");
-    scanf("%ls", &auxcodigo);
+    scanf("%ld", &auxcodigo);
     getchar();
 
-    int validaadd = 1, validaadd2 = 1, continuaradd = 1, indice_disciplina = 0;
-
+    int validaadd = 1, validaadd2 = 1, continuaradd = 1, indice_disciplina = 0, quantidadedealunos;
+    
     for(i = 0; i < 5; i++ ){
+        
         if(disciplina[i].codigo == auxcodigo){
             validaadd = 0;
             indice_disciplina = i;
-            printf("\nquantodade de alunos: %i\n", escola->disciplina[indice_disciplina].quantidadealuno);
+            quantidadedealunos = escola->disciplina[indice_disciplina].quantidadealuno;
+            
             while (continuaradd != 0){
-                if(escola->disciplina[indice_disciplina].quantidadealuno < 10){
-                    printf("Digite a matricula do aluno");
+                if(quantidadedealunos < 10){
+                    printf("\nDigite a matricula do aluno: ");
                     scanf("%ld", &auxmatricula);
                     for(i = 0; i < 30; i++){
                         if(escola->alunos[i].matricula == auxmatricula){
@@ -183,7 +185,7 @@ void addAluno(Escola *escola, Disciplina *disciplina){
                     }
                     while (validaadd2 != 0){
                         printf("\nAluno nao encontrado\n");
-                        printf("Digite a matricula do aluno");
+                        printf("\nDigite a matricula do aluno: ");
                         scanf("%ld", &auxmatricula);
                         for(i = 0; i < 30; i++){
                             if(escola->alunos[i].matricula == auxmatricula){
@@ -200,7 +202,9 @@ void addAluno(Escola *escola, Disciplina *disciplina){
                     printf("\nTurma esta com o maximo de alunos");
                     continuaradd = 0;
                 }
-                escola->disciplina[indice_disciplina].quantidadealuno++;
+                quantidadedealunos++;
+                escola->disciplina[indice_disciplina].quantidadealuno = quantidadedealunos;
+                printf("\n\nAluno cadastrado com sucesso\n\n");
                 printf("\nDigite 1 para cadastrar outro aluno ou 0 para finalizar: ");
                 scanf("%d", &continuaradd);
             
@@ -216,11 +220,13 @@ void addAluno(Escola *escola, Disciplina *disciplina){
         for(i = 0; i < 5; i++){
             if(disciplina[i].codigo == auxcodigo){
                 validaadd = 0;
+                 indice_disciplina = i;
+                quantidadedealunos = escola->disciplina[indice_disciplina].quantidadealuno;
                 while (continuaradd != 0){
                     indice_disciplina = i;
-                    printf("\nquantodade de alunos: %i\n", escola->disciplina[indice_disciplina].quantidadealuno);
-                    if(escola->disciplina[indice_disciplina].quantidadealuno < 10){
-                        printf("Digite a matricula do aluno");
+                    
+                    if(quantidadedealunos < 10){
+                        printf("\nDigite a matricula do aluno: ");
                         scanf("%ld", &auxmatricula);
                         for(i = 0; i < 30; i++){
                             if(escola->alunos[i].matricula == auxmatricula){
@@ -228,13 +234,13 @@ void addAluno(Escola *escola, Disciplina *disciplina){
                                 disciplina->aluno[i].matricula = escola->alunos[i].matricula;
                                 strcpy(disciplina->aluno[i].nome, escola->alunos[i].nome);
                                 strcpy(disciplina->aluno[i].sobrenome, escola->alunos[i].sobrenome );
-                                printf("\nquantodade de alunos: %i\n", escola->disciplina[indice_disciplina].quantidadealuno);
+                                
                             }
                         }
                     
                         while (validaadd2 != 0){
                             printf("\nAluno nao encontrado\n");
-                            printf("Digite a matricula do aluno");
+                            printf("\nDigite a matricula do aluno: ");
                             scanf("%ld", &auxmatricula);
                             for(i = 0; i < 30; i++){
                                 if(escola->alunos[i].matricula == auxmatricula){
@@ -253,6 +259,7 @@ void addAluno(Escola *escola, Disciplina *disciplina){
                     }
 
                     escola->disciplina[indice_disciplina].quantidadealuno = escola->disciplina[indice_disciplina].quantidadealuno + 1;
+                    printf("\n\nAluno cadastrado com sucesso\n\n");
                     printf("\nDigite 1 para cadastrar outro aluno ou 0 para finalizar: ");
                     scanf("%d", &continuaradd);
                     getchar();
