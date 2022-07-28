@@ -1,11 +1,696 @@
-#include <time.h>
-int contadorMatriculaAluno = 0, contadorPIS = 0;
-void clr()
-{
+    #include <time.h>
+    #include <stdio.h>
+    #include <stdlib.h>
+    #include "metodos.h"    
+    
+    char entrada[100], tipo[3];
+    int contadoraluno, contadorprofessor;
+    int contadorpv, auxcontador, padrao;
+    int alunoadd;
+    int contadorMatriculaAluno = 0;
+    
+    extern Escola escola;
+
+    
+
+void clr(){
     printf("\ec\e[3J");
 }
+    
+//(Aluno Brasileiro não PcD) - nome;sobrenome;0;CPF;RG;DD/MM/AAAA;0;CEP;0 >>> Tipo 1 <<<
+//(Aluno Estrangeiro não PCD)  - nome;sobrenome;1;Nacionalidade;Passaporte;DD/MM/AAAA;0;CEP;0 >>> Tipo 2 <<<
+//(Aluno Brasileiro PcD) - nome;sobrenome;0;CPF;RG;DD/MM/AAAA;1;laudo;CEP;0 >>> Tipo 3 <<<
+//(Aluno Estrangeiro PcD) - nome;sobrenome;1;Nacionalidade;Passaporte;DD/MM/AAAA;1;laudo;CEP;0 >>> Tipo 4 <<<
+//(Professor Brasileiro não Pcd) - nome;sobrenome;0;CPF;RG;DD/MM/AAAA;0;CEP;1;PIS >>> Tipo 5 <<<
+//(Professor Estrangeiro não PCD)  - nome;sobrenome;1;Nacionalidade;Passaporte;DD/MM/AAAA;0;CEP;1;PIS >>> Tipo 6 <<<
+//(Professor Brasileiro PcD) - nome;sobrenome;0;CPF;RG;DD/MM/AAAA;1;laudo;CEP;1;PIS >>> Tipo 7 <<<
+//(Professor Estrangeiro PcD) - nome;sobrenome;1;Nacionalidade;Passaporte;DD/MM/AAAA;1;laudo;CEP;1;PIS >>> Tipo 8 <<<
+void verificarEntrada(){
+    contadorpv = 0;
+    for(int i = 0; i < strlen(entrada); i++){
+        if(entrada[i] == ';'){
+            contadorpv++;
+        }           
+    }
+    if(contadorpv < 7 || contadorpv > 10){
+            printf("\nPadrao digitada nao esta correto\n");
+        }
+    else{
+        
+        padrao = 0;
+        for(int i = 0; i < strlen(entrada); i++){
+            if(entrada[i] == ';' && entrada[i+1] == '0' && (entrada[i+2] == ';' || entrada[i+2] == '\0')){
+                tipo[padrao] = '0';
+                padrao++;
+                
+            }
+             if(entrada[i] == ';' && entrada[i+1] == '1' && (entrada[i+2] == ';' || entrada[i+2] == '\0')){
+                tipo[padrao] = '1';
+                padrao++;
+            }
+        }
+    }
 
-void mostraPessoa(Escola *escola, int contador)
+
+
+}
+
+void cadastraPessoa(Escola *escola, int contadoraluno, int contadorprofessor){
+
+    int i, j;
+
+    printf("\nDigite o cadastro da pessoa: ");
+    scanf("%[^\n]s", entrada);
+    getchar();
+
+    verificarEntrada();
+if(contadoraluno < 30){
+    if(tipo[0] == '0' && tipo[1] == '0' && tipo[2] == '0' ){
+        //aluno brasileiro não PcD
+        /* Incrementa a Matrícula se Aluno */
+
+        int anoAtual;
+        time_t data_ano;
+        time(&data_ano);
+
+        struct tm *data = localtime(&data_ano);
+
+        anoAtual = (data->tm_year - 100);
+        anoAtual = (anoAtual * 1000) + contadorMatriculaAluno;
+
+        escola->alunos[contadoraluno].matricula = anoAtual;
+        contadorMatriculaAluno++;
+
+        escola->alunos[contadoraluno].nacionalidade = 0;
+        escola->alunos[contadoraluno].pcd = 0;
+        alunoadd = 1;
+
+        j = 0;
+        i = 0;
+        while (entrada[j] != ';'){
+            escola->alunos[contadoraluno].nome[i] = entrada[j];
+            j++;
+            i++;
+        }
+            
+        j++;
+        i = 0;
+
+        while (entrada[j] != ';'){
+            escola->alunos[contadoraluno].sobrenome[i] = entrada[j];
+            j++;
+            i++;
+        }
+
+        j = j+3;
+        i = 0;
+            
+        while (entrada[j] != ';'){
+            escola->alunos[contadoraluno].cpf[i] = entrada[j];
+            j++;
+            i++;
+        }
+
+        j++;
+        i = 0;
+
+        while (entrada[j] != ';'){
+            escola->alunos[contadoraluno].rg[i] = entrada[j];
+            j++;
+            i++;
+        }
+
+        j++;
+        i = 0;
+
+        while (entrada[j] != ';'){
+            escola->alunos[contadoraluno].dt_nasc[i] = entrada[j];
+            j++;
+            i++;
+        }
+
+        j = j+3;
+        i = 0;
+
+        while (entrada[j] != ';'){
+            escola->alunos[contadoraluno].cep[i] = entrada[j];
+            j++;
+            i++;
+        }
+    }
+
+    if(tipo[0] == '1' && tipo[1] == '0' && tipo[2] == '0' ){
+        //aluno estrangeiro não PcD
+         /* Incrementa a Matrícula se Aluno */
+
+        int anoAtual;
+        time_t data_ano;
+        time(&data_ano);
+
+        struct tm *data = localtime(&data_ano);
+
+        anoAtual = (data->tm_year - 100);
+        anoAtual = (anoAtual * 1000) + contadorMatriculaAluno;
+
+        escola->alunos[contadoraluno].matricula = anoAtual;
+        contadorMatriculaAluno++;
+
+        escola->alunos[contadoraluno].nacionalidade = 1;
+        escola->alunos[contadoraluno].pcd = 0;
+        alunoadd = 1;
+
+        j = 0;
+        i = 0;
+        while (entrada[j] != ';'){
+            escola->alunos[contadoraluno].nome[i] = entrada[j];
+            j++;
+            i++;
+        }
+            
+        j++;
+        i = 0;
+
+        while (entrada[j] != ';'){
+            escola->alunos[contadoraluno].sobrenome[i] = entrada[j];
+            j++;
+            i++;
+        }
+
+        j = j+3;
+        i = 0;
+            
+        while (entrada[j] != ';'){
+            escola->alunos[contadoraluno].paisOrigem[i] = entrada[j];
+            j++;
+            i++;
+        }
+
+        j++;
+        i = 0;
+
+        while (entrada[j] != ';'){
+            escola->alunos[contadoraluno].passaporte[i] = entrada[j];
+            j++;
+            i++;
+        }
+
+        j++;
+        i = 0;
+
+        while (entrada[j] != ';'){
+            escola->alunos[contadoraluno].dt_nasc[i] = entrada[j];
+            j++;
+            i++;
+        }
+
+        j = j+3;
+        i = 0;
+
+        while (entrada[j] != ';'){
+            escola->alunos[contadoraluno].cep[i] = entrada[j];
+            j++;
+            i++;
+        }
+    }
+
+    if(tipo[0] == '0' && tipo[1] == '1' && tipo[2] == '0' ){
+        //aluno Brasileiro PcD
+         /* Incrementa a Matrícula se Aluno */
+
+        int anoAtual;
+        time_t data_ano;
+        time(&data_ano);
+
+        struct tm *data = localtime(&data_ano);
+
+        anoAtual = (data->tm_year - 100);
+        anoAtual = (anoAtual * 1000) + contadorMatriculaAluno;
+
+        escola->alunos[contadoraluno].matricula = anoAtual;
+        contadorMatriculaAluno++;
+
+        escola->alunos[contadoraluno].nacionalidade = 0;
+        escola->alunos[contadoraluno].pcd = 1;
+        alunoadd = 1;
+
+        j = 0;
+        i = 0;
+        while (entrada[j] != ';'){
+            escola->alunos[contadoraluno].nome[i] = entrada[j];
+            j++;
+            i++;
+        }
+            
+        j++;
+        i = 0;
+
+        while (entrada[j] != ';'){
+            escola->alunos[contadoraluno].sobrenome[i] = entrada[j];
+            j++;
+            i++;
+        }
+
+        j = j+3;
+        i = 0;
+            
+        while (entrada[j] != ';'){
+            escola->alunos[contadoraluno].cpf[i] = entrada[j];
+            j++;
+            i++;
+        }
+
+        j++;
+        i = 0;
+
+        while (entrada[j] != ';'){
+            escola->alunos[contadoraluno].rg[i] = entrada[j];
+            j++;
+            i++;
+        }
+
+        j++;
+        i = 0;
+
+        while (entrada[j] != ';'){
+            escola->alunos[contadoraluno].dt_nasc[i] = entrada[j];
+            j++;
+            i++;
+        }
+
+        j = j+3;
+        i = 0;
+
+        while (entrada[j] != ';'){
+            escola->alunos[contadoraluno].laudo[i] = entrada[j];
+            j++;
+            i++;
+        }
+
+        j++;
+        i = 0;
+
+        while (entrada[j] != ';'){
+            escola->alunos[contadoraluno].cep[i] = entrada[j];
+            j++;
+            i++;
+        }
+    }
+
+    if(tipo[1] == '1' && tipo[2] == '1' && tipo[3] == '0' ){
+        //Aluno Estrangeiro Pcd
+        /* Incrementa a Matrícula se Aluno */
+
+        int anoAtual;
+        time_t data_ano;
+        time(&data_ano);
+
+        struct tm *data = localtime(&data_ano);
+
+        anoAtual = (data->tm_year - 100);
+        anoAtual = (anoAtual * 1000) + contadorMatriculaAluno;
+
+        escola->alunos[contadoraluno].matricula = anoAtual;
+        contadorMatriculaAluno++;
+
+        j = 0;
+        i = 0;
+
+        escola->alunos[contadoraluno].nacionalidade = 1;
+        escola->alunos[contadoraluno].pcd = 1;
+        alunoadd = 1;
+
+        while (entrada[j] != ';'){
+            escola->alunos[contadoraluno].nome[i] = entrada[j];
+            j++;
+            i++;
+        }
+            
+        j++;
+        i = 0;
+
+        while (entrada[j] != ';'){
+            escola->alunos[contadoraluno].sobrenome[i] = entrada[j];
+            j++;
+            i++;
+        }
+
+        j = j+3;
+        i = 0;
+            
+        while (entrada[j] != ';'){
+            escola->alunos[contadoraluno].paisOrigem[i] = entrada[j];
+            j++;
+            i++;
+        }
+
+        j++;
+        i = 0;
+
+        while (entrada[j] != ';'){
+            escola->alunos[contadoraluno].passaporte[i] = entrada[j];
+            j++;
+            i++;
+        }
+
+        j++;
+        i = 0;
+
+        while (entrada[j] != ';'){
+            escola->alunos[contadoraluno].dt_nasc[i] = entrada[j];
+            j++;
+            i++;
+        }
+
+        j = j+3;
+        i = 0;
+
+        while (entrada[j] != ';'){
+            escola->alunos[contadoraluno].laudo[i] = entrada[j];
+            j++;
+            i++;
+        }
+
+        j++;
+        i = 0;
+
+        while (entrada[j] != ';'){
+            escola->alunos[contadoraluno].cep[i] = entrada[j];
+            j++;
+            i++;
+        }
+    }
+}
+
+else{
+    printf("\nNumero maximo de alunos atingido\n");
+}
+
+if(contadorprofessor < 5){
+    printf("\nentrei no professor\n");
+    if(tipo[0] == '0' && tipo[1] == '0' && tipo[2] == '1' ){
+        //Professor Brasileiro não PcD
+
+        j = 0;
+        i = 0;
+
+        escola->professores[contadorprofessor].nacionalidade = 0;
+        escola->professores[contadorprofessor].pcd = 0;
+        alunoadd = 2;
+        printf("\nDepois do alunoadd\n");
+        while (entrada[j] != ';'){
+            escola->professores[contadorprofessor].nome[i] = entrada[j];
+            j++;
+            i++;
+            printf("\nentrei no nome\n");
+        }
+            
+        j++;
+        i = 0;
+
+        while (entrada[j] != ';'){
+            escola->professores[contadorprofessor].sobrenome[i] = entrada[j];
+            j++;
+            i++;
+        }
+
+        j = j+3;
+        i = 0;
+            
+        while (entrada[j] != ';'){
+            escola->professores[contadorprofessor].cpf[i] = entrada[j];
+            j++;
+            i++;
+        }
+
+        j++;
+        i = 0;
+
+        while (entrada[j] != ';'){
+            escola->professores[contadorprofessor].rg[i] = entrada[j];
+            j++;
+            i++;
+        }
+
+        j++;
+        i = 0;
+
+        while (entrada[j] != ';'){
+            escola->professores[contadorprofessor].dt_nasc[i] = entrada[j];
+            j++;
+            i++;
+        }
+
+        j = j+3;
+        i = 0;
+
+        while (entrada[j] != ';'){
+            escola->professores[contadorprofessor].cep[i] = entrada[j];
+            j++;
+            i++;
+        }
+        j = j + 3;
+        i = 0;
+
+        while (entrada[j] != '\0'){
+            escola->professores[contadorprofessor].pis[i] = entrada[j];
+            j++;
+            i++;
+        }
+    }
+
+     if(tipo[0] == '1' && tipo[1] == '0' && tipo[2] == '1' ){
+        //Professor Estrangeiro não PcD
+
+        j = 0;
+        i = 0;
+
+        escola->professores[contadorprofessor].nacionalidade = 1;
+        escola->professores[contadorprofessor].pcd = 0;
+        alunoadd = 2;
+
+        while (entrada[j] != ';'){
+            escola->professores[contadorprofessor].nome[i] = entrada[j];
+            j++;
+            i++;
+        }
+            
+        j++;
+        i = 0;
+
+        while (entrada[j] != ';'){
+            escola->professores[contadorprofessor].sobrenome[i] = entrada[j];
+            j++;
+            i++;
+        }
+
+        j = j+3;
+        i = 0;
+            
+        while (entrada[j] != ';'){
+            escola->professores[contadorprofessor].paisOrigem[i] = entrada[j];
+            j++;
+            i++;
+        }
+
+        j++;
+        i = 0;
+
+        while (entrada[j] != ';'){
+            escola->professores[contadorprofessor].passaporte[i] = entrada[j];
+            j++;
+            i++;
+        }
+
+        j++;
+        i = 0;
+
+        while (entrada[j] != ';'){
+            escola->professores[contadorprofessor].dt_nasc[i] = entrada[j];
+            j++;
+            i++;
+        }
+
+        j = j+3;
+        i = 0;
+
+        while (entrada[j] != ';'){
+            escola->professores[contadorprofessor].cep[i] = entrada[j];
+            j++;
+            i++;
+        }
+        j = j + 3;
+        i = 0;
+
+        while (entrada[j] != '\0'){
+            escola->professores[contadorprofessor].pis[i] = entrada[j];
+            j++;
+            i++;
+        }
+    }
+
+     if(tipo[0] == '0' && tipo[1] == '1' && tipo[2] == '1' ){
+        //Professor Brasileiro PcD
+
+        j = 0;
+        i = 0;
+
+        escola->professores[contadorprofessor].nacionalidade = 0;
+        escola->professores[contadorprofessor].pcd = 1;
+        alunoadd = 2;
+
+        while (entrada[j] != ';'){
+            escola->professores[contadorprofessor].nome[i] = entrada[j];
+            j++;
+            i++;
+        }
+            
+        j++;
+        i = 0;
+
+        while (entrada[j] != ';'){
+            escola->professores[contadorprofessor].sobrenome[i] = entrada[j];
+            j++;
+            i++;
+        }
+
+        j = j+3;
+        i = 0;
+            
+        while (entrada[j] != ';'){
+            escola->professores[contadorprofessor].cpf[i] = entrada[j];
+            j++;
+            i++;
+        }
+
+        j++;
+        i = 0;
+
+        while (entrada[j] != ';'){
+            escola->professores[contadorprofessor].rg[i] = entrada[j];
+            j++;
+            i++;
+        }
+
+        j++;
+        i = 0;
+
+        while (entrada[j] != ';'){
+            escola->professores[contadorprofessor].dt_nasc[i] = entrada[j];
+            j++;
+            i++;
+        }
+
+        j = j+3;
+        i = 0;
+
+        while (entrada[j] != ';'){
+            escola->professores[contadorprofessor].laudo[i] = entrada[j];
+            j++;
+            i++;
+        }
+        j++;
+        i = 0;
+
+        while (entrada[j] != ';'){
+            escola->professores[contadorprofessor].cep[i] = entrada[j];
+            j++;
+            i++;
+        }
+        j = j + 3;
+        i = 0;
+
+        while (entrada[j] != '\0'){
+            escola->professores[contadorprofessor].pis[i] = entrada[j];
+            j++;
+            i++;
+        }
+    }
+
+     if(tipo[0] == '1' && tipo[1] == '1' && tipo[2] == '1' ){
+        //Professor Estrangeiro PcD
+
+        j = 0;
+        i = 0;
+
+        escola->professores[contadorprofessor].nacionalidade = 1;
+        escola->professores[contadorprofessor].pcd = 1;
+        alunoadd = 2;
+
+        while (entrada[j] != ';'){
+            escola->professores[contadorprofessor].nome[i] = entrada[j];
+            j++;
+            i++;
+        }
+            
+        j++;
+        i = 0;
+
+        while (entrada[j] != ';'){
+            escola->professores[contadorprofessor].sobrenome[i] = entrada[j];
+            j++;
+            i++;
+        }
+
+        j = j+3;
+        i = 0;
+            
+        while (entrada[j] != ';'){
+            escola->professores[contadorprofessor].paisOrigem[i] = entrada[j];
+            j++;
+            i++;
+        }
+
+        j++;
+        i = 0;
+
+        while (entrada[j] != ';'){
+            escola->professores[contadorprofessor].passaporte[i] = entrada[j];
+            j++;
+            i++;
+        }
+
+        j++;
+        i = 0;
+
+        while (entrada[j] != ';'){
+            escola->professores[contadorprofessor].dt_nasc[i] = entrada[j];
+            j++;
+            i++;
+        }
+
+        j = j+3;
+        i = 0;
+
+        while (entrada[j] != ';'){
+            escola->professores[contadorprofessor].laudo[i] = entrada[j];
+            j++;
+            i++;
+        }
+        j++;
+        i = 0;
+
+        while (entrada[j] != ';'){
+            escola->professores[contadorprofessor].cep[i] = entrada[j];
+            j++;
+            i++;
+        }
+        j = j + 3;
+        i = 0;
+
+        while (entrada[j] != '\0'){
+            escola->professores[contadorprofessor].pis[i] = entrada[j];
+            j++;
+            i++;
+        }
+    }
+}
+else{
+    printf("\nNumero maximo de professores atingido\n");
+}
+}
+
+
+void mostraPessoa(Escola *escola, int contadoraluno, int contadorprofessor)
 {
     int menu1 = 0;
     int matricula = 0;
@@ -20,17 +705,17 @@ void mostraPessoa(Escola *escola, int contador)
         scanf("%d", &matricula);
 
         int aux = 0;
-        for (int i = 0; i < contador; i++)
+        for (int i = 0; i < contadoraluno; i++)
         {
             if (matricula == escola->alunos[i].matricula)
             {
-                printf("Matricula: %i\n", escola->alunos[i].matricula);
+                printf("\nMatricula: %i\n", escola->alunos[i].matricula);
                 printf("Nome: %s\n", escola->alunos[i].nome);
                 printf("Sobrenome: %s\n", escola->alunos[i].sobrenome);
                 if (escola->alunos->nacionalidade == 0)
                 {
                     printf("CPF: %s\n", escola->alunos[i].cpf);
-                    printf("CPF: %s\n", escola->alunos[i].rg);
+                    printf("RG: %s\n", escola->alunos[i].rg);
                 }
                 else
                 {
@@ -40,7 +725,7 @@ void mostraPessoa(Escola *escola, int contador)
                 printf("Data de Nascimento: %s\n", escola->alunos[i].dt_nasc);
                 if (escola->alunos->pcd == 1)
                 {
-                    printf("CPF: %s\n", escola->alunos[i].laudo);
+                    printf("Laudo: %s\n", escola->alunos[i].laudo);
                 }
                 printf("\n");
                 aux = 1;
@@ -56,17 +741,14 @@ void mostraPessoa(Escola *escola, int contador)
         printf("Digite o PIS: ");
         scanf("%s", pis);
         getchar();
-        printf("1: %d\n", pis);
-        printf("2: %d\n", escola->professores[0].pis);
-        printf("3: %S\n", escola->professores[0].nome);
-        printf("4: %S\n", escola->professores[0].sobrenome);
-        printf("5: %S\n", escola->professores[0].dt_nasc);
         
-        for (int i = 0; i < contador; i++)
+        for (int i = 0; i < contadorprofessor; i++)
         {
-            if (pis == escola->professores[i].pis)
-            {
-                printf("Matricula: %i\n", escola->professores[i].pis);
+            
+            int comparapis = strcmp(pis, escola->professores[i].pis);
+            if (comparapis == 0){
+
+                printf("Pis: %i\n", escola->professores[i].pis);
                 printf("Nome: %s\n", escola->professores[i].nome);
                 printf("Sobrenome: %s\n", escola->professores[i].sobrenome);
                 if (escola->professores->nacionalidade == 0)
@@ -98,966 +780,4 @@ void mostraPessoa(Escola *escola, int contador)
     default:
         break;
     }
-}
-
-int cadastraPessoa(Escola *escola, int contador)
-{
-    char entrada[100];
-    scanf("%[^\n]s", entrada);
-    getchar();
-    printf("\n");
-    char pVirgula[2];
-    int cont = 0;
-
-    /*
-    Laço de repetição para verificar se foi digitado o padrão correto
-    001, 010, 100... etc. E com base nisso cadastrar a pessoa.
-    */
-    int i, j;
-
-    int teste = 0;
-    for (i = 0; i < strlen(entrada); i++)
-    {
-        if (entrada[i] == ';')
-        {
-            if (cont == 1)
-            {
-                pVirgula[0] = entrada[i + 1];
-            }
-            if (cont == 5)
-            {
-                pVirgula[1] = entrada[i + 1];
-                if (entrada[i + 1] == '1')
-                {
-                    teste = 8;
-                }
-                else
-                {
-                    teste = 7;
-                }
-            }
-            if (cont == teste)
-            {
-                pVirgula[2] = entrada[i + 1];
-            }
-            cont++;
-        }
-    }
-
-    /*
-    Verificar e validar qual o padrão foi digitado.
-    */
-    if (cont == 8 || cont == 9 || cont == 10)
-    {
-
-        if (pVirgula[0] == '0' && pVirgula[1] == '0' && pVirgula[2] == '0')
-        {
-            cont = 0;
-            // nome;sobrenome;0;CPF;RG;DD/MM/AAAA;0;CEP;0
-
-            printf("Brasileiro, não PcD e Aluno\n");
-
-            int i, j;
-            long int matricula = 0;
-
-            /* Incrementa a Matrícula se Aluno */
-
-            matricula = matricula + contadorMatriculaAluno;
-
-            int anoAtual;
-            time_t data_ano;
-            time(&data_ano);
-
-            struct tm *data = localtime(&data_ano);
-
-            anoAtual = (data->tm_year - 100);
-            anoAtual = (anoAtual * 1000) + matricula;
-
-            escola->alunos[contador].matricula = anoAtual;
-            contadorMatriculaAluno++;
-
-            for (i = 0, j = 0; i < strlen(entrada); i++)
-            {
-
-                if (entrada[i] == ';')
-                {
-                    cont++;
-                }
-                if (cont == 0 && entrada[i] != ';')
-                {
-                    escola->alunos[contador].nome[j] = entrada[i];
-                    j++;
-                }
-            }
-            cont = 0; // Zerando o contador pro próximo loop
-            for (i = 0, j = 0; i < strlen(entrada); i++)
-            {
-                if (entrada[i] == ';')
-                {
-                    cont++;
-                }
-                if (cont == 1 && entrada[i] != ';')
-                {
-                    escola->alunos[contador].sobrenome[j] = entrada[i];
-                    j++;
-                }
-            }
-            cont = 0; // Zerando o contador pro próximo loop
-            for (i = 0, j = 0; i < strlen(entrada); i++)
-            {
-                if (entrada[i] == ';')
-                {
-                    cont++;
-                }
-                if (cont == 3 && entrada[i] != ';')
-                {
-                    escola->alunos[contador].cpf[j] = entrada[i];
-                    j++;
-                }
-            }
-            cont = 0; // Zerando o contador pro próximo loop
-            for (i = 0, j = 0; i < strlen(entrada); i++)
-            {
-                if (entrada[i] == ';')
-                {
-                    cont++;
-                }
-                if (cont == 4 && entrada[i] != ';')
-                {
-                    escola->alunos[contador].rg[j] = entrada[i];
-                    j++;
-                }
-            }
-            cont = 0; // Zerando o contador pro próximo loop}
-            for (i = 0, j = 0; i < strlen(entrada); i++)
-            {
-                if (entrada[i] == ';')
-                {
-                    cont++;
-                }
-                if (cont == 5 && entrada[i] != ';')
-                {
-                    escola->alunos[contador].dt_nasc[j] = entrada[i];
-                    j++;
-                }
-            }
-            cont = 0; // Zerando o contador pro próximo loop
-            for (i = 0, j = 0; i < strlen(entrada); i++)
-            {
-                if (entrada[i] == ';')
-                {
-                    cont++;
-                }
-                if (cont == 7 && entrada[i] != ';')
-                {
-                    escola->alunos[contador].cep[j] = entrada[i];
-                    j++;
-                }
-            }
-            escola->alunos[contador].nacionalidade = 0;
-            escola->alunos[contador].pcd = 0;
-
-            return 1;
-        }
-        else if (pVirgula[0] == '0' && pVirgula[1] == '1' && pVirgula[2] == '0')
-        {
-            printf("Brasileiro, PcD e Aluno\n");
-            cont = 0;
-            // nome;sobrenome;0;CPF;RG;DD/MM/AAAA;1;laudo;CEP;0
-
-            int i, j;
-            long int matricula = 0;
-
-            /* Incrementa a Matrícula se Aluno */
-
-            matricula = matricula + contadorMatriculaAluno;
-
-            int anoAtual;
-            time_t data_ano;
-            time(&data_ano);
-
-            struct tm *data = localtime(&data_ano);
-
-            anoAtual = (data->tm_year - 100);
-            anoAtual = (anoAtual * 1000) + matricula;
-
-            escola->alunos[contador].matricula = anoAtual;
-            contadorMatriculaAluno++;
-
-            for (i = 0, j = 0; i < strlen(entrada); i++)
-            {
-
-                if (entrada[i] == ';')
-                {
-                    cont++;
-                }
-                if (cont == 0 && entrada[i] != ';')
-                {
-                    escola->alunos[contador].nome[j] = entrada[i];
-                    j++;
-                }
-            }
-            cont = 0; // Zerando o contador pro próximo loop
-            for (i = 0, j = 0; i < strlen(entrada); i++)
-            {
-                if (entrada[i] == ';')
-                {
-                    cont++;
-                }
-                if (cont == 1 && entrada[i] != ';')
-                {
-                    escola->alunos[contador].sobrenome[j] = entrada[i];
-                    j++;
-                }
-            }
-            cont = 0; // Zerando o contador pro próximo loop
-            for (i = 0, j = 0; i < strlen(entrada); i++)
-            {
-                if (entrada[i] == ';')
-                {
-                    cont++;
-                }
-                if (cont == 3 && entrada[i] != ';')
-                {
-                    escola->alunos[contador].cpf[j] = entrada[i];
-                    j++;
-                }
-            }
-            cont = 0; // Zerando o contador pro próximo loop
-            for (i = 0, j = 0; i < strlen(entrada); i++)
-            {
-                if (entrada[i] == ';')
-                {
-                    cont++;
-                }
-                if (cont == 4 && entrada[i] != ';')
-                {
-                    escola->alunos[contador].rg[j] = entrada[i];
-                    j++;
-                }
-            }
-            cont = 0; // Zerando o contador pro próximo loop}
-            for (i = 0, j = 0; i < strlen(entrada); i++)
-            {
-                if (entrada[i] == ';')
-                {
-                    cont++;
-                }
-                if (cont == 5 && entrada[i] != ';')
-                {
-                    escola->alunos[contador].dt_nasc[j] = entrada[i];
-                    j++;
-                }
-            }
-            cont = 0; // Zerando o contador pro próximo loop
-            for (i = 0, j = 0; i < strlen(entrada); i++)
-            {
-                if (entrada[i] == ';')
-                {
-                    cont++;
-                }
-                if (cont == 7 && entrada[i] != ';')
-                {
-                    escola->alunos[contador].laudo[j] = entrada[i];
-                    j++;
-                }
-            }
-            cont = 0; // Zerando o contador pro próximo loop
-            for (i = 0, j = 0; i < strlen(entrada); i++)
-            {
-                if (entrada[i] == ';')
-                {
-                    cont++;
-                }
-                if (cont == 8 && entrada[i] != ';')
-                {
-                    escola->alunos[contador].cep[j] = entrada[i];
-                    j++;
-                }
-            }
-            escola->alunos[contador].nacionalidade = 0;
-            escola->alunos[contador].pcd = 1;
-
-            return 1;
-        }
-        else if (pVirgula[0] == '0' && pVirgula[1] == '0' && pVirgula[2] == '1')
-        {
-            printf("Brasileiro, não PcD e Professor\n");
-            cont = 0;
-            // nome;sobrenome;0;CPF;RG;DD/MM/AAAA;0;CEP;1;pis
-
-            int i, j;
-            long int matricula = 0;
-
-            for (i = 0, j = 0; i < strlen(entrada); i++)
-            {
-
-                if (entrada[i] == ';')
-                {
-                    cont++;
-                }
-                if (cont == 0 && entrada[i] != ';')
-                {
-                    escola->professores[contador].nome[j] = entrada[i];
-                    j++;
-                }
-            }
-            cont = 0; // Zerando o contador pro próximo loop
-            for (i = 0, j = 0; i < strlen(entrada); i++)
-            {
-                if (entrada[i] == ';')
-                {
-                    cont++;
-                }
-                if (cont == 1 && entrada[i] != ';')
-                {
-                    escola->professores[contador].sobrenome[j] = entrada[i];
-                    j++;
-                }
-            }
-            cont = 0; // Zerando o contador pro próximo loop
-            for (i = 0, j = 0; i < strlen(entrada); i++)
-            {
-                if (entrada[i] == ';')
-                {
-                    cont++;
-                }
-                if (cont == 3 && entrada[i] != ';')
-                {
-                    escola->professores[contador].cpf[j] = entrada[i];
-                    j++;
-                }
-            }
-            cont = 0; // Zerando o contador pro próximo loop
-            for (i = 0, j = 0; i < strlen(entrada); i++)
-            {
-                if (entrada[i] == ';')
-                {
-                    cont++;
-                }
-                if (cont == 4 && entrada[i] != ';')
-                {
-                    escola->professores[contador].rg[j] = entrada[i];
-                    j++;
-                }
-            }
-            cont = 0; // Zerando o contador pro próximo loop}
-            for (i = 0, j = 0; i < strlen(entrada); i++)
-            {
-                if (entrada[i] == ';')
-                {
-                    cont++;
-                }
-                if (cont == 5 && entrada[i] != ';')
-                {
-                    escola->professores[contador].dt_nasc[j] = entrada[i];
-                    j++;
-                }
-            }
-            cont = 0; // Zerando o contador pro próximo loop
-            for (i = 0, j = 0; i < strlen(entrada); i++)
-            {
-                if (entrada[i] == ';')
-                {
-                    cont++;
-                }
-                if (cont == 7 && entrada[i] != ';')
-                {
-                    escola->professores[contador].cep[j] = entrada[i];
-                    j++;
-                }
-            }
-            cont = 0; // Zerando o contador pro próximo loop
-            for (i = 0, j = 0; i < strlen(entrada); i++)
-            {
-                if (entrada[i] == ';')
-                {
-                    cont++;
-                }
-                if (cont == 8 && entrada[i] != ';')
-                {
-                    escola->professores[contador].pis[j] = entrada[i];
-                    j++;
-                }
-            }
-            printf("%s\n", escola->professores[contador].pis);
-            escola->alunos[contador].nacionalidade = 0;
-            escola->alunos[contador].pcd = 0;
-
-            return 1;
-        }
-        else if (pVirgula[0] == '0' && pVirgula[1] == '1' && pVirgula[2] == '1')
-        {
-            printf("Brasileiro, PcD e Professor\n");
-            cont = 0;
-            // nome;sobrenome;0;CPF;RG;DD/MM/AAAA;1;laudo;CEP;1;pis
-
-            int i, j;
-            long int matricula = 0;
-
-            for (i = 0, j = 0; i < strlen(entrada); i++)
-            {
-
-                if (entrada[i] == ';')
-                {
-                    cont++;
-                }
-                if (cont == 0 && entrada[i] != ';')
-                {
-                    escola->professores[contador].nome[j] = entrada[i];
-                    j++;
-                }
-            }
-            cont = 0; // Zerando o contador pro próximo loop
-            for (i = 0, j = 0; i < strlen(entrada); i++)
-            {
-                if (entrada[i] == ';')
-                {
-                    cont++;
-                }
-                if (cont == 1 && entrada[i] != ';')
-                {
-                    escola->professores[contador].sobrenome[j] = entrada[i];
-                    j++;
-                }
-            }
-            cont = 0; // Zerando o contador pro próximo loop
-            for (i = 0, j = 0; i < strlen(entrada); i++)
-            {
-                if (entrada[i] == ';')
-                {
-                    cont++;
-                }
-                if (cont == 3 && entrada[i] != ';')
-                {
-                    escola->professores[contador].cpf[j] = entrada[i];
-                    j++;
-                }
-            }
-            cont = 0; // Zerando o contador pro próximo loop
-            for (i = 0, j = 0; i < strlen(entrada); i++)
-            {
-                if (entrada[i] == ';')
-                {
-                    cont++;
-                }
-                if (cont == 4 && entrada[i] != ';')
-                {
-                    escola->professores[contador].rg[j] = entrada[i];
-                    j++;
-                }
-            }
-            cont = 0; // Zerando o contador pro próximo loop}
-            for (i = 0, j = 0; i < strlen(entrada); i++)
-            {
-                if (entrada[i] == ';')
-                {
-                    cont++;
-                }
-                if (cont == 5 && entrada[i] != ';')
-                {
-                    escola->professores[contador].dt_nasc[j] = entrada[i];
-                    j++;
-                }
-            }
-            cont = 0; // Zerando o contador pro próximo loop
-            for (i = 0, j = 0; i < strlen(entrada); i++)
-            {
-                if (entrada[i] == ';')
-                {
-                    cont++;
-                }
-                if (cont == 6 && entrada[i] != ';')
-                {
-                    escola->professores[contador].laudo[j] = entrada[i];
-                    j++;
-                }
-            }
-            cont = 0; // Zerando o contador pro próximo loop
-            for (i = 0, j = 0; i < strlen(entrada); i++)
-            {
-                if (entrada[i] == ';')
-                {
-                    cont++;
-                }
-                if (cont == 7 && entrada[i] != ';')
-                {
-                    escola->professores[contador].cep[j] = entrada[i];
-                    j++;
-                }
-            }
-            cont = 0; // Zerando o contador pro próximo loop
-            for (i = 0, j = 0; i < strlen(entrada); i++)
-            {
-                if (entrada[i] == ';')
-                {
-                    cont++;
-                }
-                if (cont == 9 && entrada[i] != ';')
-                {
-                    escola->professores[contador].pis[j] = entrada[i];
-                    j++;
-                }
-            }
-            escola->alunos[contador].nacionalidade = 0;
-            escola->alunos[contador].pcd = 1;
-
-            return 1;
-        }
-        else if (pVirgula[0] == '1' && pVirgula[1] == '0' && pVirgula[2] == '0')
-        {
-            printf("Estrangeiro, não PcD e Aluno\n");
-
-            int i, j;
-            long int matricula = 0;
-            // nome;sobrenome;1;passaporte;paisOrigem;DD/MM/AAAA;0;CEP;0
-            /* Incrementa a Matrícula se Aluno */
-
-            matricula = matricula + contadorMatriculaAluno;
-
-            int anoAtual;
-            time_t data_ano;
-            time(&data_ano);
-
-            struct tm *data = localtime(&data_ano);
-
-            anoAtual = (data->tm_year - 100);
-            anoAtual = (anoAtual * 1000) + matricula;
-
-            escola->alunos[contador].matricula = anoAtual;
-            contadorMatriculaAluno++;
-
-            for (i = 0, j = 0; i < strlen(entrada); i++)
-            {
-
-                if (entrada[i] == ';')
-                {
-                    cont++;
-                }
-                if (cont == 0 && entrada[i] != ';')
-                {
-                    escola->alunos[contador].nome[j] = entrada[i];
-                    j++;
-                }
-            }
-            cont = 0; // Zerando o contador pro próximo loop
-            for (i = 0, j = 0; i < strlen(entrada); i++)
-            {
-                if (entrada[i] == ';')
-                {
-                    cont++;
-                }
-                if (cont == 1 && entrada[i] != ';')
-                {
-                    escola->alunos[contador].sobrenome[j] = entrada[i];
-                    j++;
-                }
-            }
-            cont = 0; // Zerando o contador pro próximo loop
-            for (i = 0, j = 0; i < strlen(entrada); i++)
-            {
-                if (entrada[i] == ';')
-                {
-                    cont++;
-                }
-                if (cont == 3 && entrada[i] != ';')
-                {
-                    escola->alunos[contador].passaporte[j] = entrada[i];
-                    j++;
-                }
-            }
-            cont = 0; // Zerando o contador pro próximo loop
-            for (i = 0, j = 0; i < strlen(entrada); i++)
-            {
-                if (entrada[i] == ';')
-                {
-                    cont++;
-                }
-                if (cont == 4 && entrada[i] != ';')
-                {
-                    escola->alunos[contador].paisOrigem[j] = entrada[i];
-                    j++;
-                }
-            }
-            cont = 0; // Zerando o contador pro próximo loop}
-            for (i = 0, j = 0; i < strlen(entrada); i++)
-            {
-                if (entrada[i] == ';')
-                {
-                    cont++;
-                }
-                if (cont == 5 && entrada[i] != ';')
-                {
-                    escola->alunos[contador].dt_nasc[j] = entrada[i];
-                    j++;
-                }
-            }
-            cont = 0; // Zerando o contador pro próximo loop
-            for (i = 0, j = 0; i < strlen(entrada); i++)
-            {
-                if (entrada[i] == ';')
-                {
-                    cont++;
-                }
-                if (cont == 7 && entrada[i] != ';')
-                {
-                    escola->alunos[contador].cep[j] = entrada[i];
-                    j++;
-                }
-            }
-            escola->alunos[contador].nacionalidade = 1;
-            escola->alunos[contador].pcd = 0;
-
-            return 1;
-        }
-        else if (pVirgula[0] == '1' && pVirgula[1] == '1' && pVirgula[2] == '0')
-        {
-            printf("Estrangeiro, PcD e Aluno\n");
-            // nome;sobrenome;1;passaporte;paisOrigem;DD/MM/AAAA;1;laudo;CEP;0
-
-            int i, j;
-            long int matricula = 0;
-
-            /* Incrementa a Matrícula se Aluno */
-
-            matricula = matricula + contadorMatriculaAluno;
-
-            int anoAtual;
-            time_t data_ano;
-            time(&data_ano);
-
-            struct tm *data = localtime(&data_ano);
-
-            anoAtual = (data->tm_year - 100);
-            anoAtual = (anoAtual * 1000) + matricula;
-
-            escola->alunos[contador].matricula = anoAtual;
-            contadorMatriculaAluno++;
-
-            for (i = 0, j = 0; i < strlen(entrada); i++)
-            {
-
-                if (entrada[i] == ';')
-                {
-                    cont++;
-                }
-                if (cont == 0 && entrada[i] != ';')
-                {
-                    escola->alunos[contador].nome[j] = entrada[i];
-                    j++;
-                }
-            }
-            cont = 0; // Zerando o contador pro próximo loop
-            for (i = 0, j = 0; i < strlen(entrada); i++)
-            {
-                if (entrada[i] == ';')
-                {
-                    cont++;
-                }
-                if (cont == 1 && entrada[i] != ';')
-                {
-                    escola->alunos[contador].sobrenome[j] = entrada[i];
-                    j++;
-                }
-            }
-            cont = 0; // Zerando o contador pro próximo loop
-            for (i = 0, j = 0; i < strlen(entrada); i++)
-            {
-                if (entrada[i] == ';')
-                {
-                    cont++;
-                }
-                if (cont == 3 && entrada[i] != ';')
-                {
-                    escola->alunos[contador].passaporte[j] = entrada[i];
-                    j++;
-                }
-            }
-            cont = 0; // Zerando o contador pro próximo loop
-            for (i = 0, j = 0; i < strlen(entrada); i++)
-            {
-                if (entrada[i] == ';')
-                {
-                    cont++;
-                }
-                if (cont == 4 && entrada[i] != ';')
-                {
-                    escola->alunos[contador].paisOrigem[j] = entrada[i];
-                    j++;
-                }
-            }
-            cont = 0; // Zerando o contador pro próximo loop}
-            for (i = 0, j = 0; i < strlen(entrada); i++)
-            {
-                if (entrada[i] == ';')
-                {
-                    cont++;
-                }
-                if (cont == 5 && entrada[i] != ';')
-                {
-                    escola->alunos[contador].dt_nasc[j] = entrada[i];
-                    j++;
-                }
-            }
-            cont = 0; // Zerando o contador pro próximo loop
-            for (i = 0, j = 0; i < strlen(entrada); i++)
-            {
-                if (entrada[i] == ';')
-                {
-                    cont++;
-                }
-                if (cont == 6 && entrada[i] != ';')
-                {
-                    escola->alunos[contador].laudo[j] = entrada[i];
-                    j++;
-                }
-            }
-            cont = 0; // Zerando o contador pro próximo loop
-            for (i = 0, j = 0; i < strlen(entrada); i++)
-            {
-                if (entrada[i] == ';')
-                {
-                    cont++;
-                }
-                if (cont == 7 && entrada[i] != ';')
-                {
-                    escola->alunos[contador].cep[j] = entrada[i];
-                    j++;
-                }
-            }
-            escola->alunos[contador].nacionalidade = 1;
-            escola->alunos[contador].pcd = 1;
-
-            return 1;
-        }
-        else if (pVirgula[0] == '1' && pVirgula[1] == '0' && pVirgula[2] == '1')
-        {
-            printf("Estrangeiro, não PcD e Professor\n");
-            cont = 0;
-            // nome;sobrenome;1;passaporte;paisOrigem;DD/MM/AAAA;0;CEP;1;pis
-
-            int i, j;
-            long int matricula = 0;
-
-            for (i = 0, j = 0; i < strlen(entrada); i++)
-            {
-
-                if (entrada[i] == ';')
-                {
-                    cont++;
-                }
-                if (cont == 0 && entrada[i] != ';')
-                {
-                    escola->professores[contador].nome[j] = entrada[i];
-                    j++;
-                }
-            }
-            cont = 0; // Zerando o contador pro próximo loop
-            for (i = 0, j = 0; i < strlen(entrada); i++)
-            {
-                if (entrada[i] == ';')
-                {
-                    cont++;
-                }
-                if (cont == 1 && entrada[i] != ';')
-                {
-                    escola->professores[contador].sobrenome[j] = entrada[i];
-                    j++;
-                }
-            }
-            cont = 0; // Zerando o contador pro próximo loop
-            for (i = 0, j = 0; i < strlen(entrada); i++)
-            {
-                if (entrada[i] == ';')
-                {
-                    cont++;
-                }
-                if (cont == 3 && entrada[i] != ';')
-                {
-                    escola->professores[contador].passaporte[j] = entrada[i];
-                    j++;
-                }
-            }
-            cont = 0; // Zerando o contador pro próximo loop
-            for (i = 0, j = 0; i < strlen(entrada); i++)
-            {
-                if (entrada[i] == ';')
-                {
-                    cont++;
-                }
-                if (cont == 4 && entrada[i] != ';')
-                {
-                    escola->professores[contador].paisOrigem[j] = entrada[i];
-                    j++;
-                }
-            }
-            cont = 0; // Zerando o contador pro próximo loop}
-            for (i = 0, j = 0; i < strlen(entrada); i++)
-            {
-                if (entrada[i] == ';')
-                {
-                    cont++;
-                }
-                if (cont == 5 && entrada[i] != ';')
-                {
-                    escola->professores[contador].dt_nasc[j] = entrada[i];
-                    j++;
-                }
-            }
-            cont = 0; // Zerando o contador pro próximo loop
-            for (i = 0, j = 0; i < strlen(entrada); i++)
-            {
-                if (entrada[i] == ';')
-                {
-                    cont++;
-                }
-                if (cont == 7 && entrada[i] != ';')
-                {
-                    escola->professores[contador].cep[j] = entrada[i];
-                    j++;
-                }
-            }
-            cont = 0; // Zerando o contador pro próximo loop
-            for (i = 0, j = 0; i < strlen(entrada); i++)
-            {
-                if (entrada[i] == ';')
-                {
-                    cont++;
-                }
-                if (cont == 8 && entrada[i] != ';')
-                {
-                    escola->professores[contador].pis[j] = entrada[i];
-                    j++;
-                }
-            }
-            escola->alunos[contador].nacionalidade = 1;
-            escola->alunos[contador].pcd = 0;
-
-            return 1;
-        }
-        else if (pVirgula[0] == '1' && pVirgula[1] == '1' && pVirgula[2] == '1')
-        {
-            printf("Estrangeiro, não PcD e Professor\n");
-            cont = 0;
-            // nome;sobrenome;1;passaporte;paisOrigem;DD/MM/AAAA;1;laudo;CEP;1;pis
-
-            int i, j;
-            long int matricula = 0;
-
-            for (i = 0, j = 0; i < strlen(entrada); i++)
-            {
-
-                if (entrada[i] == ';')
-                {
-                    cont++;
-                }
-                if (cont == 0 && entrada[i] != ';')
-                {
-                    escola->professores[contador].nome[j] = entrada[i];
-                    j++;
-                }
-            }
-            cont = 0; // Zerando o contador pro próximo loop
-            for (i = 0, j = 0; i < strlen(entrada); i++)
-            {
-                if (entrada[i] == ';')
-                {
-                    cont++;
-                }
-                if (cont == 1 && entrada[i] != ';')
-                {
-                    escola->professores[contador].sobrenome[j] = entrada[i];
-                    j++;
-                }
-            }
-            cont = 0; // Zerando o contador pro próximo loop
-            for (i = 0, j = 0; i < strlen(entrada); i++)
-            {
-                if (entrada[i] == ';')
-                {
-                    cont++;
-                }
-                if (cont == 3 && entrada[i] != ';')
-                {
-                    escola->professores[contador].passaporte[j] = entrada[i];
-                    j++;
-                }
-            }
-            cont = 0; // Zerando o contador pro próximo loop
-            for (i = 0, j = 0; i < strlen(entrada); i++)
-            {
-                if (entrada[i] == ';')
-                {
-                    cont++;
-                }
-                if (cont == 4 && entrada[i] != ';')
-                {
-                    escola->professores[contador].paisOrigem[j] = entrada[i];
-                    j++;
-                }
-            }
-            cont = 0; // Zerando o contador pro próximo loop}
-            for (i = 0, j = 0; i < strlen(entrada); i++)
-            {
-                if (entrada[i] == ';')
-                {
-                    cont++;
-                }
-                if (cont == 5 && entrada[i] != ';')
-                {
-                    escola->professores[contador].dt_nasc[j] = entrada[i];
-                    j++;
-                }
-            }
-            cont = 0; // Zerando o contador pro próximo loop
-            for (i = 0, j = 0; i < strlen(entrada); i++)
-            {
-                if (entrada[i] == ';')
-                {
-                    cont++;
-                }
-                if (cont == 8 && entrada[i] != ';')
-                {
-                    escola->professores[contador].laudo[j] = entrada[i];
-                    j++;
-                }
-            }
-            cont = 0; // Zerando o contador pro próximo loop
-            for (i = 0, j = 0; i < strlen(entrada); i++)
-            {
-                if (entrada[i] == ';')
-                {
-                    cont++;
-                }
-                if (cont == 7 && entrada[i] != ';')
-                {
-                    escola->professores[contador].cep[j] = entrada[i];
-                    j++;
-                }
-            }
-            cont = 0; // Zerando o contador pro próximo loop
-            for (i = 0, j = 0; i < strlen(entrada); i++)
-            {
-                if (entrada[i] == ';')
-                {
-                    cont++;
-                }
-                if (cont == 8 && entrada[i] != ';')
-                {
-                    escola->professores[contador].pis[j] = entrada[i];
-                    j++;
-                }
-            }
-            escola->alunos[contador].nacionalidade = 1;
-            escola->alunos[contador].pcd = 0;
-
-            return 1;
-        }
-    }
-    else
-    {
-        printf("Erro no padrão de entrada\n");
-    }
-
-    return 0;
 }

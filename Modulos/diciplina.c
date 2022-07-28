@@ -6,7 +6,7 @@
 void menu_Disciplina();
 
 char auxnomeDiciplina [100];
-long int auxpis;
+char auxpis[12];
 char auxnome [20] = "Rafael";
 char auxsobrenome[50] = "Braga";
 
@@ -20,14 +20,6 @@ extern Escola escola;
 
 void cadastrarDisiplina(Escola *escola,Disciplina *disciplina, int contadordisciplina){
 
-    escola->professores[0].pis = 1;
-    escola->professores[1].pis = 2;
-    escola->professores[2].pis = 3;
-    escola->professores[3].pis = 4;
-    escola->professores[4].pis = 5;
-
-   
-    
 
     printf("\nDigite o nome da diciplina: ");
     scanf("%s", auxnomeDiciplina);
@@ -39,11 +31,11 @@ void cadastrarDisiplina(Escola *escola,Disciplina *disciplina, int contadordisci
     scanf("%i", &auxcargahoraria);
     getchar();
     printf("\nDigite o PIS do professor: ");
-    scanf("%ld", &auxpis);
+    scanf("%s", &auxpis);
     
     for(i = 0; i < 5; i++){
-            
-            if (escola->professores[i].pis == auxpis){
+            int comparapis = strcmp(auxpis, escola->professores[i].pis);
+            if (comparapis == 0){
                
                 valida = 0;
             }
@@ -51,10 +43,11 @@ void cadastrarDisiplina(Escola *escola,Disciplina *disciplina, int contadordisci
     while (valida != 0){
         printf("\n\nProfessor nao encontrado\n");
         printf("\n\nDigite o PIS do professor: ");
-        scanf("%ld", &auxpis);
+        scanf("%s", &auxpis);
         getchar();
         for(i = 0; i < 5; i++){
-            if (escola->professores[i].pis == auxpis){
+            int comparapis = strcmp(auxpis, escola->professores[i].pis);
+            if (comparapis == 0){
                 valida = 0;
             }
         }
@@ -94,10 +87,10 @@ void mudarprofessor(Escola *escola, Disciplina *disciplina, int contadordiscipli
             valida = 0;
             mudar_professor = i;
             printf("\nDigite o numero pis do novo professor: ");
-            scanf("%ld", &auxpis);
+            scanf("%s", &auxpis);
             for(i = 0; i < 5; i++){
-            
-                if (escola->professores[i].pis == auxpis){
+                int comparapis = strcmp(auxpis, escola->professores[i].pis);
+                if (comparapis == 0){
                     valida2 = 0;
                     disciplina[mudar_professor].professor = escola->professores[i];
                 }
@@ -105,10 +98,11 @@ void mudarprofessor(Escola *escola, Disciplina *disciplina, int contadordiscipli
             while (valida2 != 0){
                 printf("\n\nProfessor nao encontrado\n");
                 printf("\n\nDigite o PIS do novo professor: ");
-                scanf("%ld", &auxpis);
+                scanf("%s", &auxpis);
                 getchar();
                 for(i = 0; i < 5; i++){
-                    if (escola->professores[i].pis == auxpis){
+                    int comparapis = strcmp(auxpis, escola->professores[i].pis);
+                    if (comparapis == 0){
                     valida2 = 0;
                     }
                 }
@@ -129,10 +123,10 @@ void mudarprofessor(Escola *escola, Disciplina *disciplina, int contadordiscipli
             valida = 0;
             mudar_professor = i;
             printf("\nDigite o numero pis do novo professor: ");
-            scanf("%ld", &auxpis);
+            scanf("%s", &auxpis);
             for(i = 0; i < 5; i++){
-            
-                if (escola->professores[i].pis == auxpis){
+                int comparapis = strcmp(auxpis, escola->professores[i].pis);
+                if (comparapis == 0){
                     valida2 = 0;
                     disciplina[mudar_professor].professor = escola->professores[i];
                 }
@@ -140,10 +134,11 @@ void mudarprofessor(Escola *escola, Disciplina *disciplina, int contadordiscipli
             while (valida2 != 0){
                 printf("\n\nProfessor nao encontrado\n");
                 printf("\n\nDigite o PIS do novo professor: ");
-                scanf("%ld", &auxpis);
+                scanf("%s", &auxpis);
                 getchar();
                 for(i = 0; i < 5; i++){
-                    if (escola->professores[i].pis == auxpis){
+                    int comparapis = strcmp(auxpis, escola->professores[i].pis);
+                    if (comparapis == 0){
                     valida2 = 0;
                     }
                 }

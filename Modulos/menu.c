@@ -13,10 +13,12 @@
 
 int menuPessoa;
 int menuDisciplina;
-int contador;
+int contadoraluno;
+int contadorprofessor;
 int menuPrincipal;
 int contadordisciplina;
 int alunosmatriculados;
+extern int alunoadd;
 extern Escola escola;
 extern Disciplina disciplina;
 
@@ -101,20 +103,30 @@ while(menuPessoa != 5){
 
                 //Cadastrar pessoa
                 
-            
-                if(cadastraPessoa(&escola, contador) == 1){
-                    printf("Pessoa cadastrada com sucesso");
-                    contador++;
-                    sleep(2);
+                
+                cadastraPessoa(&escola, contadoraluno, contadorprofessor);
+                printf("\n%i\n", alunoadd);
+                
+                if(alunoadd == 1){
+                    contadoraluno++;
+                    alunoadd = 0;
+                    printf("\nAluno cadastrado com sucesso\n");
                 }
+                if(alunoadd == 2){
+                    contadorprofessor++;
+                    alunoadd = 0;  
+                    printf("\nProfessor cadastrado com sucesso\n");
+                }
+                sleep(2);
+                
                 
                 break;
 
                 case 2:
                 //Exibir dados de uma pessoa
                 
-                printf("\nExibir");
-                mostraPessoa(&escola, contador);
+               
+                mostraPessoa(&escola, contadoraluno, contadorprofessor);
                 sleep(2);
                 break;
 

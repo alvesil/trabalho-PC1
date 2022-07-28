@@ -20,7 +20,7 @@ typedef struct
     char cep[9];
     int proforaluno;
     int matricula;
-    long int pis ;
+    char pis [12] ;
 
 } Pessoa;
 
@@ -47,9 +47,9 @@ Escola escola;
 
 void clr();
 
-void mostraPessoa(Escola *escola, int contador);
+void mostraPessoa(Escola *escola, int contadoraluno, int contadorprofessor);
 
-int cadastraPessoa(Escola *escola, int contador);
+void cadastraPessoa(Escola *escola, int contadoraluno, int contadorprofessor);
 
 
 #endif
