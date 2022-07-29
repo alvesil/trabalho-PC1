@@ -781,3 +781,148 @@ void mostraPessoa(Escola *escola, int contadoraluno, int contadorprofessor)
         break;
     }
 }
+
+void alterardadopessoa(Escola *escola, int contadoraluno, int contadorprofessor){
+
+    int menu1 = 0;
+    int matricula = 0;
+    char pis[12];
+    char laudomedico[30];
+    char novocep[12];
+    int opcao;
+
+    printf("1-Aluno \n2-Professor \n3-Voltar \n");
+    scanf("%i", &menu1);
+
+    switch (menu1)
+    {
+    case 1:
+        printf("Digite a matricula: ");
+        scanf("%d", &matricula);
+
+        int aux = 0;
+        for (int i = 0; i < contadoraluno; i++)
+        {
+            if (matricula == escola->alunos[i].matricula){
+
+                printf("\n1 - Pessoa com Deficiencia(PcD)?");
+                printf("\n2 - Codigo do Laudo Medico");
+                printf("\n3 - CEP");
+                scanf("%d", &opcao);
+                getchar();
+
+                if(opcao == 1){
+                    if(escola->alunos[i].pcd == 0){
+                        escola->alunos[i].pcd = 1;
+                        printf("Digite o codigo do laudo medico: ");
+                        scanf("%s", laudomedico);
+                        getchar();
+                        strcpy(escola->alunos[i].laudo, laudomedico);
+                    }
+                    else{
+                        escola->alunos[i].pcd = 0;
+                        strcpy(escola->alunos[i].laudo, "");
+                        printf("\n\nItem deficiencia removida\n\n");
+                    }
+                    aux = 1;
+                }
+
+                if(opcao == 2){
+                    if(escola->professores[i] == 1){
+                    printf("\nDigite o novo codigo do laudo medico: ");
+                    scanf("%s", laudomedico);
+                    getchar();
+                    strcpy(escola->alunos[i].laudo, laudomedico);
+
+                    aux = 1;
+                    }
+                    else{
+                        aux = 0;
+                    }
+                }
+
+                if(opcao == 3){
+                    printf("\nDigite o novo CEP: ");
+                    scanf("%s", novocep);
+                    getchar();
+                    strcpy(escola->alunos[i].cep, novocep);
+
+                    aux = 1;
+                }               
+            }
+        }
+        if (aux == 0)
+        {
+            printf("\nOpcao invalida\n");
+        }
+
+        break;
+    case 2:
+        printf("Digite o PIS: ");
+        scanf("%s", pis);
+        getchar();
+        
+        for (int i = 0; i < contadorprofessor; i++)
+        {
+            
+            int comparapis = strcmp(pis, escola->professores[i].pis);
+            if (comparapis == 0){
+                printf("\n1 - Pessoa com Deficiencia(PcD)?");
+                printf("\n2 - Codigo do Laudo Medico");
+                printf("\n3 - CEP");
+                scanf("%d", &opcao);
+                getchar();
+
+                if(opcao == 1){
+                    if(escola->alunos[i].pcd == 0){
+                        escola->professores[i].pcd = 1;
+                        printf("Digite o codigo do laudo medico: ");
+                        scanf("%s", laudomedico);
+                        getchar();
+                        strcpy(escola->professores[i].laudo, laudomedico);
+                    }
+                    else{
+                        escola->professores[i].pcd = 0;
+                        strcpy(escola->professores[i].laudo, "");
+                        printf("\n\nItem deficiencia removida\n\n");
+                    }
+                    aux = 1;
+                }
+
+                if(opcao == 2){
+                    if(escola->professores[i] == 1){
+                    printf("\nDigite o novo codigo do laudo medico: ");
+                    scanf("%s", laudomedico);
+                    getchar();
+                    strcpy(escola->professores[i].laudo, laudomedico);
+
+                    aux = 1;
+                    }
+                    else{
+                        aux = 0;
+                    }
+                }
+
+                if(opcao == 3){
+
+                    printf("\nDigite o novo CEP: ");
+                    scanf("%s", novocep);
+                    getchar();
+                    strcpy(escola->professores[i].cep, novocep);
+
+                    aux = 1;
+                }        
+                
+            }
+        }
+        if (aux == 0)
+        {
+            printf("Pessoa nao encontrada ou nao possui o item\n");
+        }
+        break;
+    case 3:
+        break;
+    default:
+        break;
+    }
+}

@@ -133,7 +133,7 @@ while(menuPessoa != 5){
                 case 3:
                 //Alterar dados da pessoa
                 
-                printf("\nAlterar dados"); 
+                alterardadopessoa(&escola, contadoraluno, contadorprofessor);
                 sleep(2);
                 break;
 

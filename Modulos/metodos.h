@@ -12,7 +12,7 @@ typedef struct
     int nacionalidade;
     char cpf[15];
     char rg[8];
-    char passaporte[9];
+    char passaporte[20];
     char paisOrigem[20];
     char dt_nasc[11];
     int pcd;
@@ -50,6 +50,8 @@ void clr();
 void mostraPessoa(Escola *escola, int contadoraluno, int contadorprofessor);
 
 void cadastraPessoa(Escola *escola, int contadoraluno, int contadorprofessor);
+
+void alterardadopessoa(Escola *escola, int contadoraluno, int contadorprofessor);
 
 
 #endif
