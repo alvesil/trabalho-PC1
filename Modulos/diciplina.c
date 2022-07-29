@@ -7,8 +7,8 @@ void menu_Disciplina();
 
 char auxnomeDiciplina [100];
 char auxpis[12];
-char auxnome [20] = "Rafael";
-char auxsobrenome[50] = "Braga";
+char auxnome [20];
+char auxsobrenome[50];
 
 
 int i, valida = 1, auxcargahoraria, quantidadealuno;
@@ -54,10 +54,6 @@ void cadastrarDisiplina(Escola *escola,Disciplina *disciplina, int contadordisci
 
     }
 
-    strcpy (escola->professores[0].nome, auxnome);
-    strcpy (escola->professores[0].sobrenome, auxsobrenome);
-    strcpy (escola->professores[1].nome, auxsobrenome);
-    strcpy (escola->professores[1].sobrenome, auxnome);
 
     strcpy (disciplina->professor.nome, escola->professores[contadordisciplina].nome);
     strcpy (disciplina->professor.sobrenome, escola->professores[contadordisciplina].sobrenome);

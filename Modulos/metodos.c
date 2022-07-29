@@ -17,12 +17,12 @@ void clr(){
     printf("\ec\e[3J");
 }
     
-//(Aluno Brasileiro não PcD) - nome;sobrenome;0;CPF;RG;DD/MM/AAAA;0;CEP;0 >>> Tipo 1 <<<
-//(Aluno Estrangeiro não PCD)  - nome;sobrenome;1;Nacionalidade;Passaporte;DD/MM/AAAA;0;CEP;0 >>> Tipo 2 <<<
-//(Aluno Brasileiro PcD) - nome;sobrenome;0;CPF;RG;DD/MM/AAAA;1;laudo;CEP;0 >>> Tipo 3 <<<
+//(Aluno Brasileiro não PcD) - Rafael;Braga;0;013.027.131-40;2375833;15/07/1986;0;72007540;0 >>> Tipo 1 <<<
+//(Aluno Estrangeiro não PCD)  - Girolamo;Debastiani;1;Italiano;3039495868;01/05/1925;0;72005674;0 >>> Tipo 2 <<<
+//(Aluno Brasileiro PcD) - Tiago;Braga;0;202.304.214-30;3421355;16/02/1984;1;TC3469;20998560;0 >>> Tipo 3 <<<
 //(Aluno Estrangeiro PcD) - nome;sobrenome;1;Nacionalidade;Passaporte;DD/MM/AAAA;1;laudo;CEP;0 >>> Tipo 4 <<<
-//(Professor Brasileiro não Pcd) - nome;sobrenome;0;CPF;RG;DD/MM/AAAA;0;CEP;1;PIS >>> Tipo 5 <<<
-//(Professor Estrangeiro não PCD)  - nome;sobrenome;1;Nacionalidade;Passaporte;DD/MM/AAAA;0;CEP;1;PIS >>> Tipo 6 <<<
+//(Professor Brasileiro não Pcd) - Heloise;Marques;0;339.220.234-39;4920788;21/03/1998;0;230094;1;2222 >>> Tipo 5 <<<
+//(Professor Estrangeiro não PCD)  - Sonia Maria;Braga;1;Suica;94883002387;03/05/1950;0;72027620;1;1111 >>> Tipo 6 <<<
 //(Professor Brasileiro PcD) - nome;sobrenome;0;CPF;RG;DD/MM/AAAA;1;laudo;CEP;1;PIS >>> Tipo 7 <<<
 //(Professor Estrangeiro PcD) - nome;sobrenome;1;Nacionalidade;Passaporte;DD/MM/AAAA;1;laudo;CEP;1;PIS >>> Tipo 8 <<<
 void verificarEntrada(){
@@ -296,7 +296,7 @@ if(contadoraluno < 30){
         }
     }
 
-    if(tipo[1] == '1' && tipo[2] == '1' && tipo[3] == '0' ){
+    if(tipo[0] == '1' && tipo[1] == '1' && tipo[2] == '0' ){
         //Aluno Estrangeiro Pcd
         /* Incrementa a Matrícula se Aluno */
 
@@ -386,7 +386,7 @@ else{
 }
 
 if(contadorprofessor < 5){
-    printf("\nentrei no professor\n");
+    
     if(tipo[0] == '0' && tipo[1] == '0' && tipo[2] == '1' ){
         //Professor Brasileiro não PcD
 
@@ -396,12 +396,12 @@ if(contadorprofessor < 5){
         escola->professores[contadorprofessor].nacionalidade = 0;
         escola->professores[contadorprofessor].pcd = 0;
         alunoadd = 2;
-        printf("\nDepois do alunoadd\n");
+        
         while (entrada[j] != ';'){
             escola->professores[contadorprofessor].nome[i] = entrada[j];
             j++;
             i++;
-            printf("\nentrei no nome\n");
+            
         }
             
         j++;
@@ -712,7 +712,7 @@ void mostraPessoa(Escola *escola, int contadoraluno, int contadorprofessor)
                 printf("\nMatricula: %i\n", escola->alunos[i].matricula);
                 printf("Nome: %s\n", escola->alunos[i].nome);
                 printf("Sobrenome: %s\n", escola->alunos[i].sobrenome);
-                if (escola->alunos->nacionalidade == 0)
+                if (escola->alunos[i].nacionalidade == 0)
                 {
                     printf("CPF: %s\n", escola->alunos[i].cpf);
                     printf("RG: %s\n", escola->alunos[i].rg);
@@ -723,7 +723,7 @@ void mostraPessoa(Escola *escola, int contadoraluno, int contadorprofessor)
                     printf("País de Origem: %s\n", escola->alunos[i].paisOrigem);
                 }
                 printf("Data de Nascimento: %s\n", escola->alunos[i].dt_nasc);
-                if (escola->alunos->pcd == 1)
+                if (escola->alunos[i].pcd == 1)
                 {
                     printf("Laudo: %s\n", escola->alunos[i].laudo);
                 }
@@ -748,13 +748,13 @@ void mostraPessoa(Escola *escola, int contadoraluno, int contadorprofessor)
             int comparapis = strcmp(pis, escola->professores[i].pis);
             if (comparapis == 0){
 
-                printf("Pis: %i\n", escola->professores[i].pis);
+                printf("\nPis: %s\n", escola->professores[i].pis);
                 printf("Nome: %s\n", escola->professores[i].nome);
                 printf("Sobrenome: %s\n", escola->professores[i].sobrenome);
-                if (escola->professores->nacionalidade == 0)
+                if (escola->professores[i].nacionalidade == 0)
                 {
                     printf("CPF: %s\n", escola->professores[i].cpf);
-                    printf("CPF: %s\n", escola->professores[i].rg);
+                    printf("RG: %s\n", escola->professores[i].rg);
                 }
                 else
                 {
@@ -762,9 +762,9 @@ void mostraPessoa(Escola *escola, int contadoraluno, int contadorprofessor)
                     printf("País de Origem: %s\n", escola->professores[i].paisOrigem);
                 }
                 printf("Data de Nascimento: %s\n", escola->professores[i].dt_nasc);
-                if (escola->professores->pcd == 1)
+                if (escola->professores[i].pcd == 1)
                 {
-                    printf("CPF: %s\n", escola->alunos[i].laudo);
+                    printf("Loaudo: %s\n", escola->professores[i].laudo);
                 }
                 printf("\n");
                 aux = 1;

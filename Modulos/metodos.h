@@ -10,7 +10,7 @@ typedef struct
     char nome[20];
     char sobrenome[50];
     int nacionalidade;
-    char cpf[12];
+    char cpf[15];
     char rg[8];
     char passaporte[9];
     char paisOrigem[20];

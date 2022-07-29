@@ -105,7 +105,7 @@ while(menuPessoa != 5){
                 
                 
                 cadastraPessoa(&escola, contadoraluno, contadorprofessor);
-                printf("\n%i\n", alunoadd);
+                
                 
                 if(alunoadd == 1){
                     contadoraluno++;
