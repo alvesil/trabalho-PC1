@@ -760,6 +760,7 @@ void mostraPessoa(Escola *escola, int contadoraluno, int contadorprofessor)
                 {
                     printf("Passaporte: %s\n", escola->professores[i].passaporte);
                     printf("País de Origem: %s\n", escola->professores[i].paisOrigem);
+                    printf("opcao de nacionalidade: %d", escola->professores[i].nacionalidade);
                 }
                 printf("Data de Nascimento: %s\n", escola->professores[i].dt_nasc);
                 if (escola->professores[i].pcd == 1)
@@ -828,7 +829,7 @@ void alterardadopessoa(Escola *escola, int contadoraluno, int contadorprofessor)
                 }
 
                 if(opcao == 2){
-                    if(escola->professores[i] == 1){
+                    if(escola->alunos[i].pcd == 0){
                     printf("\nDigite o novo codigo do laudo medico: ");
                     scanf("%s", laudomedico);
                     getchar();
@@ -837,6 +838,7 @@ void alterardadopessoa(Escola *escola, int contadoraluno, int contadorprofessor)
                     aux = 1;
                     }
                     else{
+                        printf("pessoa nao consta como PcD");
                         aux = 0;
                     }
                 }
@@ -874,7 +876,7 @@ void alterardadopessoa(Escola *escola, int contadoraluno, int contadorprofessor)
                 getchar();
 
                 if(opcao == 1){
-                    if(escola->alunos[i].pcd == 0){
+                    if(escola->professores[i].pcd == 0){
                         escola->professores[i].pcd = 1;
                         printf("Digite o codigo do laudo medico: ");
                         scanf("%s", laudomedico);
@@ -890,7 +892,7 @@ void alterardadopessoa(Escola *escola, int contadoraluno, int contadorprofessor)
                 }
 
                 if(opcao == 2){
-                    if(escola->professores[i] == 1){
+                    if(escola->professores[i].pcd == 1){
                     printf("\nDigite o novo codigo do laudo medico: ");
                     scanf("%s", laudomedico);
                     getchar();
@@ -926,3 +928,108 @@ void alterardadopessoa(Escola *escola, int contadoraluno, int contadorprofessor)
         break;
     }
 }
+
+void excluiraluno (Escola *escola, int contadoraluno, int contadorprofessor){
+
+     int menu1 = 0;
+    int matricula = 0;
+    char pis[12];
+    printf("1-Aluno \n2-Professor \n3-Voltar \n");
+    scanf("%i", &menu1);
+
+    switch (menu1)
+    {
+    case 1:
+        printf("Digite a matricula: ");
+        scanf("%d", &matricula);
+
+        int aux = 0;
+        for (int i = 0; i < contadoraluno; i++)
+        {
+            if (matricula == escola->alunos[i].matricula)
+            {
+                escola->alunos[i].matricula = 0;
+                strcpy(escola->alunos[i].nome, "");
+                strcpy(escola->alunos[i].sobrenome, "");
+                strcpy(escola->alunos[i].cpf, "");
+                strcpy(escola->alunos[i].rg, "");
+                strcpy(escola->alunos[i].passaporte, "");
+                strcpy(escola->alunos[i].paisOrigem , "");
+                strcpy(escola->alunos[i].dt_nasc, "");
+                strcpy(escola->alunos[i].laudo, "");
+                strcpy(escola->alunos[i].cep, "");
+                strcpy(escola->alunos[i].nome, escola->alunos[contadoraluno].nome);
+                strcpy(escola->alunos[i].sobrenome, escola->alunos[contadoraluno].sobrenome);
+                strcpy(escola->alunos[i].cpf, escola->alunos[contadoraluno].cpf);
+                strcpy(escola->alunos[i].rg, escola->alunos[contadoraluno].rg);
+                strcpy(escola->alunos[i].passaporte, escola->alunos[contadoraluno].passaporte);
+                strcpy(escola->alunos[i].paisOrigem, escola->alunos[contadoraluno].paisOrigem);
+                strcpy(escola->alunos[i].dt_nasc, escola->alunos[contadoraluno].dt_nasc);
+                strcpy(escola->alunos[i].laudo, escola->alunos[contadoraluno].laudo);
+                strcpy(escola->alunos[i].cep, escola->alunos[contadoraluno].cep);
+                escola->alunos[i].nacionalidade = escola->alunos[contadoraluno].nacionalidade;
+                escola->alunos[i].pcd = escola->alunos[contadoraluno].pcd;
+
+               
+                aux = 1;
+                contadoraluno--;
+                printf("\nAluno excluido com sucesso\n");
+            }
+        }
+        if (aux == 0)
+        {
+            printf("Pessoa nao encontrada\n");
+        }
+
+        break;
+    case 2:
+        printf("Digite o PIS: ");
+        scanf("%s", pis);
+        getchar();
+        
+      
+        for (int i = 0; i < contadorprofessor; i++)
+        {
+            int comparapis = strcmp(pis, escola->professores[i].pis);
+            if (comparapis == 0){
+                strcpy(escola->professores[i].nome, "");
+                strcpy(escola->professores[i].sobrenome, "");
+                strcpy(escola->professores[i].cpf, "");
+                strcpy(escola->professores[i].rg, "");
+                strcpy(escola->professores[i].passaporte, "");
+                strcpy(escola->professores[i].paisOrigem , "");
+                strcpy(escola->professores[i].dt_nasc, "");
+                strcpy(escola->professores[i].laudo, "");
+                strcpy(escola->professores[i].cep, "");
+                strcpy(escola->professores[i].pis,"");
+                strcpy(escola->professores[i].nome, escola->professores[contadorprofessor].nome);
+                strcpy(escola->professores[i].sobrenome, escola->professores[contadorprofessor].sobrenome);
+                strcpy(escola->professores[i].cpf, escola->professores[contadorprofessor].cpf);
+                strcpy(escola->professores[i].rg, escola->professores[contadorprofessor].rg);
+                strcpy(escola->professores[i].passaporte, escola->professores[contadorprofessor].passaporte);
+                strcpy(escola->professores[i].paisOrigem, escola->professores[contadorprofessor].paisOrigem);
+                strcpy(escola->professores[i].dt_nasc, escola->professores[contadorprofessor].dt_nasc);
+                strcpy(escola->professores[i].laudo, escola->professores[contadorprofessor].laudo);
+                strcpy(escola->professores[i].cep, escola->professores[contadorprofessor].cep);
+                strcpy(escola->professores[i].pis, escola->professores[contadorprofessor].pis);
+                escola->professores[i].nacionalidade = escola->professores[contadorprofessor].nacionalidade;
+                escola->professores[i].pcd = escola->professores[contadorprofessor].pcd;
+                contadorprofessor--;
+                aux = 1;
+                printf("\nAluno excluido com sucesso\n");
+            }
+        }
+        
+        if (aux == 0)
+        {
+            printf("Pessoa nao encontrada\n");
+        }
+        break;
+    case 3:
+        break;
+    default:
+        break;
+    }
+}
+
+

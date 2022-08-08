@@ -140,7 +140,7 @@ while(menuPessoa != 5){
                   case 4:
                 //Excluir pessoa
                 
-                printf("\nExcluir");  
+                excluiraluno (&escola, contadoraluno, contadorprofessor); 
                 sleep(2);
                 break;
 

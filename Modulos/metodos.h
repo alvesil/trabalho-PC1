@@ -53,5 +53,7 @@ void cadastraPessoa(Escola *escola, int contadoraluno, int contadorprofessor);
 
 void alterardadopessoa(Escola *escola, int contadoraluno, int contadorprofessor);
 
+void excluiraluno (Escola *escola, int contadoraluno, int contadorprofessor);
+
 
 #endif
